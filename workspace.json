@@ -1,7 +1,101 @@
 {
   "version": 2,
-  "projects": {},
+  "projects": {
+    "jitsi-meet-react": {
+      "root": "apps/jitsi-meet-react",
+      "sourceRoot": "apps/jitsi-meet-react/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/jitsi-meet-react",
+            "index": "apps/jitsi-meet-react/src/index.html",
+            "main": "apps/jitsi-meet-react/src/main.tsx",
+            "polyfills": "apps/jitsi-meet-react/src/polyfills.ts",
+            "tsConfig": "apps/jitsi-meet-react/tsconfig.app.json",
+            "assets": [
+              "apps/jitsi-meet-react/src/favicon.ico",
+              "apps/jitsi-meet-react/src/assets"
+            ],
+            "styles": ["apps/jitsi-meet-react/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/jitsi-meet-react/src/environments/environment.ts",
+                  "with": "apps/jitsi-meet-react/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "jitsi-meet-react:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "jitsi-meet-react:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/jitsi-meet-react/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/jitsi-meet-react"],
+          "options": {
+            "jestConfig": "apps/jitsi-meet-react/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "jitsi-meet-react"
 }
