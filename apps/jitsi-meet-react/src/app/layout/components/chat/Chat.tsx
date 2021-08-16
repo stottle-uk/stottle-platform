@@ -22,12 +22,12 @@ function Chat({ messages, hideChat, send }: Props) {
     }
   }, [messages.length]);
 
-  const onChange = (e: any) => {
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setMsg(e.target.value);
+    setMsg(e.currentTarget.value);
   };
 
-  const onKeyUp = (e: any) => {
+  const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const m = msg.trim();

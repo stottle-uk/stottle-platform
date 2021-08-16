@@ -10,10 +10,8 @@ import {
   JitsiTracksStateService,
   JitsiUsersStateService
 } from '@stottle-platform/lib-jitsi-meet';
-import $ from 'jquery';
 import { createContext, useContext } from 'react';
 
-window.$ = $;
 const { JitsiMeetJS } = window;
 JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
 JitsiMeetJS.init();

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { JitsiEventEmitter, TrackType } from './utils';
 
 export interface CreateTracksOptions {
   devices?: string[];
-  resolution?: any;
-  constraints?: any;
+  resolution?: unknown;
+  constraints?: unknown;
   cameraDeviceId?: string;
   micDeviceId?: string;
   minFps?: number;
@@ -29,12 +30,12 @@ export interface JitsiTrack extends JitsiEventEmitter<JitsiTrack> {
   unmute(): Promise<void>;
   isMuted(): boolean;
   attach(container: HTMLElement): void;
-  dettach(container: any): void;
-  dispose(): Promise<any>;
+  dettach(container: unknown): void;
+  dispose(): Promise<unknown>;
   getId(): string;
   getParticipantId(): string;
   setAudioOutput(audioOutputDeviceId: string): void;
   getDeviceId(): string;
   isEnded(): boolean;
-  setEffect(effect: any): void;
+  setEffect(effect: unknown): void;
 }

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+import * as jQuery from 'jquery';
 import { JitsiConference } from './JitsiConference';
 import { JitsiConnectionCtr } from './JitsiConnection';
 import { JitsiMediaDevices } from './JitsiMediaDevices';
@@ -10,6 +12,8 @@ declare global {
     JitsiMeetJS: JitsiMeetJS;
   }
 }
+
+window.$ = jQuery;
 
 export type JitsiInitOptions = {
   useIPv6?: boolean;
@@ -29,12 +33,12 @@ export interface JitsiMeetJS {
   version: string;
   conference: JitsiConference;
   JitsiConnection: JitsiConnectionCtr;
-  ProxyConnectionService: any;
+  ProxyConnectionService: unknown;
   constants: {
-    participantConnectionStatus: any;
-    recording: any;
-    sipVideoGW: any;
-    transcriptionStatus: any;
+    participantConnectionStatus: unknown;
+    recording: unknown;
+    sipVideoGW: unknown;
+    transcriptionStatus: unknown;
   };
   events: {
     conference: Record<string, string>;
@@ -51,26 +55,26 @@ export interface JitsiMeetJS {
     track: Record<string, string>;
   };
   errorTypes: {
-    JitsiTrackError: any;
+    JitsiTrackError: unknown;
   };
   logLevels: LogLevels;
   mediaDevices: JitsiMediaDevices;
-  analytics: any;
+  analytics: unknown;
   init: (options?: JitsiInitOptions) => void;
   isDesktopSharingEnabled: () => boolean;
   isWebRtcSupported: () => boolean;
   setLogLevel: (level: string) => void;
-  setLogLevelById: (level: any, id: any) => void;
-  addGlobalLogTransport: (globalTransport: any) => void;
-  removeGlobalLogTransport: (globalTransport: any) => void;
-  setGlobalLogOptions: (options: any) => void;
+  setLogLevelById: (level: unknown, id: unknown) => void;
+  addGlobalLogTransport: (globalTransport: unknown) => void;
+  removeGlobalLogTransport: (globalTransport: unknown) => void;
+  setGlobalLogOptions: (options: unknown) => void;
   createLocalTracks: (options?: CreateTracksOptions) => Promise<JitsiTrack[]>;
   createTrackVADEmitter: (
-    localAudioDeviceId: any,
-    sampleRate: any,
-    vadProcessor: any
-  ) => any;
-  createAudioMixer: () => any;
+    localAudioDeviceId: unknown,
+    sampleRate: unknown,
+    vadProcessor: unknown
+  ) => unknown;
+  createAudioMixer: () => unknown;
   getActiveAudioDevice: () => Promise<{
     deviceId: string;
     deviceLabel: string;
@@ -81,18 +85,18 @@ export interface JitsiMeetJS {
   isCollectingLocalStats: () => boolean;
   enumerateDevices: (callback: Function) => void;
   getGlobalOnErrorHandler: (
-    message: any,
-    source: any,
-    lineno: any,
-    colno: any,
-    error: any
-  ) => any;
+    message: unknown,
+    source: unknown,
+    lineno: unknown,
+    colno: unknown,
+    error: unknown
+  ) => unknown;
   setNetworkInfo: (isOnline: boolean) => void;
-  setVideoTrackContentHints: (track: any, hint: string) => void;
-  precallTest: any;
+  setVideoTrackContentHints: (track: unknown, hint: string) => void;
+  precallTest: unknown;
   util: {
-    AuthUtil: any;
-    ScriptUtil: any;
-    browser: any;
+    AuthUtil: unknown;
+    ScriptUtil: unknown;
+    browser: unknown;
   };
 }
