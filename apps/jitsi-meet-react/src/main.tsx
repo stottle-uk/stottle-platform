@@ -1,14 +1,41 @@
-import { StrictMode } from 'react';
-import * as ReactDOM from 'react-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faBars,
+  faCheckSquare,
+  faCog,
+  faDesktop,
+  faMicrophone,
+  faMicrophoneSlash,
+  faPhoneSlash,
+  faUser,
+  faVideo,
+  faVideoSlash,
+  faVolumeMute,
+} from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import App from './app/App';
 
-import App from './app/app';
+library.add(
+  faCheckSquare,
+  faVideo,
+  faVideoSlash,
+  faMicrophone,
+  faMicrophoneSlash,
+  faPhoneSlash,
+  faVolumeMute,
+  faDesktop,
+  faCog,
+  faUser,
+  faBars
+);
 
 ReactDOM.render(
-  <StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root')
 );

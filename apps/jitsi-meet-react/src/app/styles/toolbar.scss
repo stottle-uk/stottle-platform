@@ -1,0 +1,70 @@
+.toolbar-container {
+  position: fixed;
+  bottom: 102px;
+  z-index: 5;
+  opacity: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolbar {
+  display: flex;
+  height: 68px;
+  padding: 0 20px;
+  border-radius: 34px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  &.hover:hover {
+    background-color: rgba($color: #333, $alpha: 0.6);
+  }
+
+  .btn {
+    position: relative;
+    width: 84px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      background: none;
+      outline: none;
+      cursor: pointer;
+      width: 100%;
+      border-left: 1px solid #000;
+      border-right: 1px solid #000;
+    }
+
+    &:first-child {
+      button {
+        border-left: none;
+      }
+    }
+
+    &:last-child {
+      button {
+        border-right: none;
+      }
+    }
+
+    span {
+      color: #4b4b4b;
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: 1.38px;
+      line-height: 10px;
+      text-transform: uppercase;
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+    }
+  }
+}
