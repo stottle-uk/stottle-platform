@@ -3,11 +3,11 @@ import { merge, take, toArray } from 'rxjs';
 import {
   ConferenceJoined,
   ConferenceLeft,
-  JitsiConferenceEventTypes,
+  JitsiConferenceEventTypes
 } from '../models/events/conference';
 import {
   ConnectionEstablished,
-  JitsiConnectionEventTypes,
+  JitsiConnectionEventTypes
 } from '../models/events/connection';
 import { JitsiDevicesEventTypes } from '../models/events/mediaDevices';
 import {
@@ -19,7 +19,7 @@ import {
   JitsiMeetJSMock,
   localUserMock,
   participantMock,
-  trackMock,
+  trackMock
 } from '../testing/jitsiMocks';
 import { JitsiMeetService } from './jitsiMeetService';
 
@@ -64,14 +64,14 @@ describe('JitsiMeetService', () => {
     );
   });
 
-  test('disconnect()', (done) => {
+  test('disconnect()', done => {
     service.disconnect().subscribe(() => {
       expect(ConnectionMock.prototype.disconnect).toHaveBeenCalled();
       done();
     });
   });
 
-  test('joinConference()', (done) => {
+  test('joinConference()', done => {
     service.joinConference('username', 'password').subscribe(() => {
       expect(ConferenceMock.prototype.setDisplayName).toHaveBeenCalledWith(
         'username'
@@ -81,28 +81,28 @@ describe('JitsiMeetService', () => {
     });
   });
 
-  test('leaveConference()', (done) => {
+  test('leaveConference()', done => {
     service.leaveConference().subscribe(() => {
       expect(ConferenceMock.prototype.leave).toHaveBeenCalled();
       done();
     });
   });
 
-  test('addTrack()', (done) => {
+  test('addTrack()', done => {
     service.addTrack(trackMock).subscribe(() => {
       expect(ConferenceMock.prototype.addTrack).toHaveBeenCalledWith(trackMock);
       done();
     });
   });
 
-  test('createLocalTracks()', (done) => {
+  test('createLocalTracks()', done => {
     const trackOptions = {
-      devices: [],
+      devices: []
     };
     service
       .createLocalTracks(trackOptions)
       .pipe(toArray())
-      .subscribe((res) => {
+      .subscribe(res => {
         expect(res).toEqual([trackMock, trackMock]);
         expect(JitsiMeetJSMock.createLocalTracks).toHaveBeenCalledWith(
           trackOptions
@@ -111,17 +111,17 @@ describe('JitsiMeetService', () => {
       });
   });
 
-  test('replaceTrack()', (done) => {
+  test('replaceTrack()', done => {
     JitsiMeetJSMock.createLocalTracks = jest
       .fn()
       .mockResolvedValue([{ ...trackMock, type: 'desktop' }]);
     const trackOptions = {
-      devices: [],
+      devices: []
     };
     service
       .replaceTrack(trackMock, trackOptions)
       .pipe(toArray())
-      .subscribe((res) => {
+      .subscribe(res => {
         expect(res).toEqual([{ ...trackMock, type: 'desktop' }]);
         expect(JitsiMeetJSMock.createLocalTracks).toHaveBeenCalledWith(
           trackOptions
@@ -130,40 +130,40 @@ describe('JitsiMeetService', () => {
           trackMock,
           {
             ...trackMock,
-            type: 'desktop',
+            type: 'desktop'
           }
         );
         done();
       });
   });
 
-  test('replaceTrack() cancel error', (done) => {
+  test('replaceTrack() cancel error', done => {
     ConferenceMock.prototype.replaceTrack = jest.fn(() => {
       // eslint-disable-next-line no-throw-literal
       throw {
-        name: 'gum.screensharing_user_canceled',
+        name: 'gum.screensharing_user_canceled'
       };
     });
 
-    service.replaceTrack(trackMock, {}).subscribe((res) => {
+    service.replaceTrack(trackMock, {}).subscribe(res => {
       expect(res).toEqual(trackMock);
       done();
     });
   });
 
-  test('replaceTrack() other error', (done) => {
+  test('replaceTrack() other error', done => {
     ConferenceMock.prototype.replaceTrack = jest.fn(() => {
       // eslint-disable-next-line no-throw-literal
       throw {
-        name: 'other Error',
+        name: 'other Error'
       };
     });
 
     service.replaceTrack(trackMock, {}).subscribe({
-      error: (res) => {
+      error: res => {
         expect(res.message).toEqual('other Error');
         done();
-      },
+      }
     });
   });
 
@@ -179,34 +179,34 @@ describe('JitsiMeetService', () => {
     ).toHaveBeenCalledWith(deviceMock.deviceId);
   });
 
-  test('getParticipants()', (done) => {
+  test('getParticipants()', done => {
     service
       .getParticipants()
       .pipe(toArray())
-      .subscribe((res) => {
+      .subscribe(res => {
         expect(res).toEqual([participantMock, participantMock]);
         done();
       });
   });
 
-  test('getRemoteTracks()', (done) => {
+  test('getRemoteTracks()', done => {
     service
       .getRemoteTracks()
       .pipe(toArray())
-      .subscribe((res) => {
+      .subscribe(res => {
         expect(res).toEqual([trackMock, trackMock, trackMock, trackMock]);
         done();
       });
   });
 
-  test('lockRoom()', (done) => {
+  test('lockRoom()', done => {
     service.lockRoom('password').subscribe(() => {
       expect(ConferenceMock.prototype.lock).toHaveBeenCalledWith('password');
       done();
     });
   });
 
-  test('kickParticipant()', (done) => {
+  test('kickParticipant()', done => {
     service.kickParticipant('userId1').subscribe(() => {
       expect(ConferenceMock.prototype.kickParticipant).toHaveBeenCalledWith(
         'userId1',
@@ -216,7 +216,7 @@ describe('JitsiMeetService', () => {
     });
   });
 
-  test('muteParticipant()', (done) => {
+  test('muteParticipant()', done => {
     service.muteParticipant('userId1', 'audio').subscribe(() => {
       expect(ConferenceMock.prototype.muteParticipant).toHaveBeenCalledWith(
         'userId1',
@@ -226,7 +226,7 @@ describe('JitsiMeetService', () => {
     });
   });
 
-  test('sendCommandOnce()', (done) => {
+  test('sendCommandOnce()', done => {
     service.sendCommandOnce('messageType', 'messageData').subscribe(() => {
       expect(ConferenceMock.prototype.sendCommandOnce).toHaveBeenCalledWith(
         'messageType',
@@ -236,7 +236,7 @@ describe('JitsiMeetService', () => {
     });
   });
 
-  test('addCommandListener()', (done) => {
+  test('addCommandListener()', done => {
     const commandHandlers: Record<string, Function> = {};
     ConferenceMock.prototype.addCommandListener = jest.fn(
       (command: string, callback: Function) =>
@@ -249,15 +249,15 @@ describe('JitsiMeetService', () => {
     service
       .addCommandListener(commandType)
       .pipe(take(commands.length), toArray())
-      .subscribe((res) => {
+      .subscribe(res => {
         expect(res).toEqual(commands);
         done();
       });
 
-    commands.forEach((cmd) => commandHandlers[commandType](cmd));
+    commands.forEach(cmd => commandHandlers[commandType](cmd));
   });
 
-  test('events$', (done) => {
+  test('events$', done => {
     const eventHandlers: Record<string, Function> = {};
     const handler = jest.fn(
       (event, callback) => (eventHandlers[event] = callback)
@@ -268,7 +268,7 @@ describe('JitsiMeetService', () => {
 
     const deviceListChangedEvt = {
       type: JitsiDevicesEventTypes.deviceListChanged,
-      payload: deviceMock,
+      payload: deviceMock
     };
     const connectionEstablishedEvt = new ConnectionEstablished();
     const conferenceJoinedEvt = new ConferenceJoined(localUserMock);
@@ -280,12 +280,12 @@ describe('JitsiMeetService', () => {
       service.mediaDevicesEvents$
     )
       .pipe(toArray())
-      .subscribe((events) => {
+      .subscribe(events => {
         expect(events).toEqual([
           deviceListChangedEvt,
           connectionEstablishedEvt,
           conferenceJoinedEvt,
-          conferenceLeftEvt,
+          conferenceLeftEvt
         ]);
         done();
       });
@@ -302,8 +302,8 @@ describe('JitsiMeetService', () => {
     service.dispose();
   });
 
-  test('devices$', (done) => {
-    service.devices$.subscribe((events) => {
+  test('devices$', done => {
+    service.devices$.subscribe(events => {
       expect(events).toEqual([deviceMock, deviceMock]);
       done();
     });

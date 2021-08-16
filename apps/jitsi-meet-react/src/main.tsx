@@ -10,7 +10,7 @@ import {
   faUser,
   faVideo,
   faVideoSlash,
-  faVolumeMute,
+  faVolumeMute
 } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import ReactDOM from 'react-dom';
