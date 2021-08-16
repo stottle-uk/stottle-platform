@@ -29,6 +29,9 @@
   "projects": {
     "jitsi-meet-react": {
       "tags": []
+    },
+    "lib-jitsi-meet-wrapper": {
+      "tags": []
     }
   }
 }

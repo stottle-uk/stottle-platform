@@ -1,4 +1,4 @@
-import { TrackType } from '../models/utils';
+import { TrackType } from '@stottle-platform/lib-jitsi-meet';
 import { useJitsiMeet } from './useJitsiMeet';
 
 export const useJitsiActions = () => {

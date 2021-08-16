@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { JitsiTrack } from '@stottle-platform/lib-jitsi-meet';
 import React from 'react';
 import { useMutedSate } from '../../../conference/hooks/useMutedState';
-import { JitsiTrack } from '../../../conference/models/JitsiTrack';
 import Speaking from './Speaking';
 
 interface OwnProps extends React.HTMLAttributes<HTMLDivElement> {

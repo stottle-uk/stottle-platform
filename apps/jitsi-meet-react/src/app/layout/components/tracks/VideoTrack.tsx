@@ -1,7 +1,9 @@
+import {
+  JitsiTrack,
+  TRACK_MUTE_CHANGED
+} from '@stottle-platform/lib-jitsi-meet';
 import React, { memo, useEffect, useRef } from 'react';
 import { fromEvent } from 'rxjs';
-import { TRACK_MUTE_CHANGED } from '../../../conference/models/events/track';
-import { JitsiTrack } from '../../../conference/models/JitsiTrack';
 
 interface OwnProps {
   track: JitsiTrack;

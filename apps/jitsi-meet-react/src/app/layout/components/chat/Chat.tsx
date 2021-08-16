@@ -1,5 +1,5 @@
+import { JitsiChatMessage } from '@stottle-platform/lib-jitsi-meet';
 import React from 'react';
-import { JitsiChatMessage } from '../../../conference/services/reducers/chatReducer';
 import iconChatBox from '../assets/icons/icon_chat_box.svg';
 import styles from './Chat.module.scss';
 import ChatMessage from './ChatMessage';

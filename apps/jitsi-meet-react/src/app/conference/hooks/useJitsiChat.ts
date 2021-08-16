@@ -1,8 +1,8 @@
-import { useObservableState } from 'observable-hooks';
 import {
   chatInitialState,
   JitsiChatMessage
-} from '../services/reducers/chatReducer';
+} from '@stottle-platform/lib-jitsi-meet';
+import { useObservableState } from 'observable-hooks';
 import { useJitsiChatState } from './useJitsiMeet';
 
 export const useJitsiChat = () => {

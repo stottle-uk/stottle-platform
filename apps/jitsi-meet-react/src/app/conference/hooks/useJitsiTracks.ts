@@ -1,6 +1,8 @@
+import {
+  JitsiTrack,
+  tracksInitialState
+} from '@stottle-platform/lib-jitsi-meet';
 import { useObservableState } from 'observable-hooks';
-import { JitsiTrack } from '../models/JitsiTrack';
-import { tracksInitialState } from '../services/reducers/tracksReducer';
 import { useJitsiConference } from './useJitsiConference';
 import { useJitsiTracksState } from './useJitsiMeet';
 import { useJitsiUsers } from './useJitsiUsers';

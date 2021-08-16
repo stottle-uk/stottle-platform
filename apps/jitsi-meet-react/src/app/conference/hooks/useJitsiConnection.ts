@@ -1,7 +1,9 @@
+import {
+  connectionInitialState,
+  JitsiConferenceOptions,
+  JitsiConnectionOptions
+} from '@stottle-platform/lib-jitsi-meet';
 import { useObservableState } from 'observable-hooks';
-import { JitsiConferenceOptions } from '../models/JitsiConference';
-import { JitsiConnectionOptions } from '../models/JitsiConnection';
-import { connectionInitialState } from '../services/reducers/connectionReducer';
 import { useJitsiConnectionState } from './useJitsiMeet';
 
 export interface JitsiProps {

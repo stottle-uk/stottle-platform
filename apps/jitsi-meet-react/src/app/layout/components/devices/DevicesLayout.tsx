@@ -1,8 +1,8 @@
-import React from 'react';
 import {
   CreateTracksOptions,
   JitsiTrack
-} from '../../../conference/models/JitsiTrack';
+} from '@stottle-platform/lib-jitsi-meet';
+import React from 'react';
 import DevicesSelect from './DevicesSelect';
 import DevicesTracks from './DevicesTracks';
 

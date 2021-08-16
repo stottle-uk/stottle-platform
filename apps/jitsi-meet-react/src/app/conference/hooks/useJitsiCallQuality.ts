@@ -1,5 +1,5 @@
+import { callQualityInitialState } from '@stottle-platform/lib-jitsi-meet';
 import { useObservableState } from 'observable-hooks';
-import { callQualityInitialState } from '../services/reducers/callQualityReducer';
 import { useJitsiCallQualityState } from './useJitsiMeet';
 
 export const useJitsiCallQuality = () => {

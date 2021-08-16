@@ -1,10 +1,10 @@
-import React from 'react';
-import { useJitsiDevices } from '../../../conference/hooks/useJitsiDevices';
-import { useMutedSate } from '../../../conference/hooks/useMutedState';
 import {
   CreateTracksOptions,
   JitsiTrack
-} from '../../../conference/models/JitsiTrack';
+} from '@stottle-platform/lib-jitsi-meet';
+import React from 'react';
+import { useJitsiDevices } from '../../../conference/hooks/useJitsiDevices';
+import { useMutedSate } from '../../../conference/hooks/useMutedState';
 import CallButton from './CallButton';
 
 interface OwnProps {

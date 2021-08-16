@@ -1,6 +1,9 @@
+import {
+  CreateTracksOptions,
+  devicesInitialState,
+  JitsiTrack
+} from '@stottle-platform/lib-jitsi-meet';
 import { useObservableState } from 'observable-hooks';
-import { CreateTracksOptions, JitsiTrack } from '../models/JitsiTrack';
-import { devicesInitialState } from '../services/reducers/devicesReducer';
 import { useJitsiDevicesState } from './useJitsiMeet';
 
 export const useJitsiDevices = () => {

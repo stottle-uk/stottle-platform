@@ -1,7 +1,9 @@
+import {
+  JitsiTrack,
+  TRACK_MUTE_CHANGED
+} from '@stottle-platform/lib-jitsi-meet';
 import { useEffect, useState } from 'react';
 import { fromEvent, merge } from 'rxjs';
-import { TRACK_MUTE_CHANGED } from '../models/events/track';
-import { JitsiTrack } from '../models/JitsiTrack';
 
 export const useMutedSate = (audio: JitsiTrack, video: JitsiTrack) => {
   const [isMuted, setMuted] = useState({

@@ -1,5 +1,5 @@
+import { conferenceInitialState } from '@stottle-platform/lib-jitsi-meet';
 import { useObservableState } from 'observable-hooks';
-import { conferenceInitialState } from '../services/reducers/conferenceReducer';
 import { useJitsiConferenceState } from './useJitsiMeet';
 
 export const useJitsiConference = () => {

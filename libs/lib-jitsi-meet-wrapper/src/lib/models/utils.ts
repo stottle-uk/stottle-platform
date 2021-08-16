@@ -27,3 +27,6 @@ export interface JitsiEventEmitter<E> {
     options?: EventListenerOptions | boolean
   ): void;
 }
+
+export const { TRACK_MUTE_CHANGED, LOCAL_TRACK_STOPPED } =
+  window.JitsiMeetJS.events.track;

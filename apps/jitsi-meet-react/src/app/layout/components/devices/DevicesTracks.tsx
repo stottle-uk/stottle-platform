@@ -1,5 +1,5 @@
+import { JitsiTrack } from '@stottle-platform/lib-jitsi-meet';
 import React, { useState } from 'react';
-import { JitsiTrack } from '../../../conference/models/JitsiTrack';
 import CallButton from '../toolbar/CallButton';
 import AudioTrack from '../tracks/AudioTrack';
 import VideoTrack from '../tracks/VideoTrack';

@@ -19,27 +19,23 @@ const Toolbar: React.FC = () => {
   const muteAll = () =>
     Object.keys(allTracks).forEach(userId => muteParticipant(userId, 'audio'));
 
-  return (
+  return localTracks.audio && localTracks.video ? (
     <>
-      {localTracks.audio && localTracks.video && (
-        <>
-          <ToolbarInner
-            video={localTracks.video}
-            audio={localTracks.audio}
-            muteAll={muteAll}
-            showSettings={() => setSettingsVisible(!settingsVisible)}
-            leaveConference={leaveConference}
-            replaceDevice={replaceDevice}
-          />
-          <Settings
-            isVisible={settingsVisible}
-            subitPassword={p => lockRoom(p)}
-            onClose={() => setSettingsVisible(!settingsVisible)}
-          />
-        </>
-      )}
+      <ToolbarInner
+        video={localTracks.video}
+        audio={localTracks.audio}
+        muteAll={muteAll}
+        showSettings={() => setSettingsVisible(!settingsVisible)}
+        leaveConference={leaveConference}
+        replaceDevice={replaceDevice}
+      />
+      <Settings
+        isVisible={settingsVisible}
+        subitPassword={p => lockRoom(p)}
+        onClose={() => setSettingsVisible(!settingsVisible)}
+      />
     </>
-  );
+  ) : null;
 };
 
 export default Toolbar;

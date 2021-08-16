@@ -1,5 +1,5 @@
+import { usersInitialState } from '@stottle-platform/lib-jitsi-meet';
 import { useObservableState } from 'observable-hooks';
-import { usersInitialState } from '../services/reducers/usersReducer';
 import { useJitsiUsersState } from './useJitsiMeet';
 
 export const useJitsiUsers = () => {

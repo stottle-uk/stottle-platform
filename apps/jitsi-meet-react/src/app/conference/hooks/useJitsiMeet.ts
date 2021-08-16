@@ -1,15 +1,17 @@
+import {
+  JitsiCallQualityStateService,
+  JitsiChatStateService,
+  JitsiConferenceStateService,
+  JitsiConnectionStateService,
+  JitsiDevicesStateService,
+  JitsiMeetService,
+  JitsiPasswordStateService,
+  JitsiStatsStateService,
+  JitsiTracksStateService,
+  JitsiUsersStateService
+} from '@stottle-platform/lib-jitsi-meet';
 import $ from 'jquery';
 import { createContext, useContext } from 'react';
-import { JitsiCallQualityStateService } from '../services/jitsiCallQualityStateService';
-import { JitsiChatStateService } from '../services/jitsiChatStateService';
-import { JitsiConferenceStateService } from '../services/jitsiConferenceStateService';
-import { JitsiConnectionStateService } from '../services/jitsiConnectionStateService';
-import { JitsiDevicesStateService } from '../services/jitsiDevicesStateService';
-import { JitsiMeetService } from '../services/jitsiMeetService';
-import { JitsiPasswordStateService } from '../services/jitsiPasswordStateService';
-import { JitsiStatsStateService } from '../services/jitsiStatsStateService';
-import { JitsiTracksStateService } from '../services/jitsiTracksStateService';
-import { JitsiUsersStateService } from '../services/jitsiUsersStateService';
 
 window.$ = $;
 const { JitsiMeetJS } = window;

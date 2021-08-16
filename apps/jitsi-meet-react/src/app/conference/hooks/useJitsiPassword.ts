@@ -1,5 +1,5 @@
+import { passwordInitialState } from '@stottle-platform/lib-jitsi-meet';
 import { useObservableState } from 'observable-hooks';
-import { passwordInitialState } from '../services/reducers/passwordReducer';
 import { useJitsiPasswordState } from './useJitsiMeet';
 
 export const useJitsiPassword = () => {

@@ -28,9 +28,7 @@ const Settings: React.FC<OwnProps> = ({
         </div>
       </div>
     </div>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default Settings;

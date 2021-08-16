@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@stottle-platform/lib-jitsi-meet": [
+        "libs/lib-jitsi-meet-wrapper/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
