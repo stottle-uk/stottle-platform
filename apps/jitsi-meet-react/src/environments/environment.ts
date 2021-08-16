@@ -3,4 +3,5 @@
 
 export const environment = {
   production: false,
+  JITSI_SERVICE_URL: 'meet.jit.si'
 };
