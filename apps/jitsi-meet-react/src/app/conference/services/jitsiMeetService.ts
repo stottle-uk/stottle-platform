@@ -70,7 +70,7 @@ export class JitsiMeetService {
         }).map(e => this.createListener(conn, e))
       )
     ),
-    tap(d => console.log('connectionEvents', d)),
+    // tap(d => console.log('connectionEvents', d)),
     shareReplay(1),
     takeUntil(this.destroy$)
   );
@@ -86,7 +86,7 @@ export class JitsiMeetService {
           .map(e => this.createListener(conf, e))
       ).pipe(map(e => this.mapJoinedEvent(conf, e)))
     ),
-    tap(d => console.log('conferenceEvents', d)),
+    // tap(d => console.log('conferenceEvents', d)),
     shareReplay(1),
     takeUntil(this.destroy$)
   );
@@ -99,7 +99,7 @@ export class JitsiMeetService {
         }).map(e => this.createListener(conf, e))
       )
     ),
-    tap(d => console.log('connectionQualityEvents', d)),
+    // tap(d => console.log('connectionQualityEvents', d)),
     shareReplay(1),
     takeUntil(this.destroy$)
   );
