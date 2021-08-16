@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useJitsiCallQuality } from '../../../conference/hooks/useJitsiCallQuality';
 import { useJitsiStats } from '../../../conference/hooks/useJitsiStats';
 
 interface OwnProps {
@@ -9,10 +8,10 @@ interface OwnProps {
 
 const Speaking: React.FC<OwnProps> = ({ userId }) => {
   const { speakers } = useJitsiStats();
-  const { localUser, remoteUsers } = useJitsiCallQuality();
+  // const { localUser, remoteUsers } = useJitsiCallQuality();
 
-  console.log(remoteUsers[userId]);
-  console.log(localUser);
+  // console.log(remoteUsers[userId]);
+  // console.log(localUser);
 
   return (
     <span>

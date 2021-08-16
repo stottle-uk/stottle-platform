@@ -37,43 +37,38 @@ const Grid: React.FC = () => {
   const { allTracks, participantsLength } = useJitsiTracks('ME!');
 
   return (
-    <>
-      <div
-        className="grid-container"
-        style={{
-          gridTemplateColumns: getCols(participantsLength),
-          gridTemplateRows: getRows(participantsLength)
-        }}
-      >
-        {allTracks.map(
-          user =>
-            user.tracks.audio &&
-            user.tracks.video && (
-              <GridItem
-                key={user.userId}
-                className="grid-item"
+    <div
+      className="grid-container"
+      style={{
+        gridTemplateColumns: getCols(participantsLength),
+        gridTemplateRows: getRows(participantsLength)
+      }}
+    >
+      {allTracks.map(
+        user =>
+          user.tracks.audio &&
+          user.tracks.video && (
+            <GridItem
+              key={user.userId}
+              className="grid-item"
+              username={user.username}
+              audio={user.tracks.audio}
+              video={user.tracks.video}
+            >
+              <GridFooter
+                className="grid-footer"
                 username={user.username}
                 audio={user.tracks.audio}
                 video={user.tracks.video}
-              >
-                <GridFooter
-                  className="grid-footer"
-                  username={user.username}
-                  audio={user.tracks.audio}
-                  video={user.tracks.video}
-                  userId={user.userId}
-                />
-                {!user.isLocal && (
-                  <GridControls
-                    className="grid-controls"
-                    userId={user.userId}
-                  />
-                )}
-              </GridItem>
-            )
-        )}
-      </div>
-    </>
+                userId={user.userId}
+              />
+              {!user.isLocal && (
+                <GridControls className="grid-controls" userId={user.userId} />
+              )}
+            </GridItem>
+          )
+      )}
+    </div>
   );
 };
 
