@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { merge, take, toArray } from 'rxjs';
+import { JitsiCallQualityEventTypes } from '../models/events/callQuality';
 import {
   ConferenceJoined,
   ConferenceLeft,
@@ -277,7 +278,8 @@ describe('JitsiMeetService', () => {
     merge(
       service.connectionEvents$,
       service.conferenceEvents$,
-      service.mediaDevicesEvents$
+      service.mediaDevicesEvents$,
+      service.connectionQualityEvents$
     )
       .pipe(toArray())
       .subscribe(events => {
@@ -285,7 +287,11 @@ describe('JitsiMeetService', () => {
           deviceListChangedEvt,
           connectionEstablishedEvt,
           conferenceJoinedEvt,
-          conferenceLeftEvt
+          conferenceLeftEvt,
+          {
+            type: JitsiCallQualityEventTypes.RemoteStatsUpdated,
+            payload: 'stats'
+          }
         ]);
         done();
       });
@@ -298,6 +304,7 @@ describe('JitsiMeetService', () => {
     );
     eventHandlers[JitsiConferenceEventTypes.Joined]();
     eventHandlers[JitsiConferenceEventTypes.Left](conferenceLeftEvt.payload);
+    eventHandlers[JitsiCallQualityEventTypes.RemoteStatsUpdated]('stats');
 
     service.dispose();
   });

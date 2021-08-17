@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { JitsiCallQualityEventTypes } from '../models/events/callQuality';
 import { JitsiConferenceEventTypes } from '../models/events/conference';
 import { JitsiConnectionEventTypes } from '../models/events/connection';
 import {
@@ -170,6 +174,9 @@ export const JitsiMeetJSMock = {
     conference: {
       JOINED: JitsiConferenceEventTypes.Joined,
       LEFT: JitsiConferenceEventTypes.Left
+    },
+    connectionQuality: {
+      CQ_REMOTES_STATS: JitsiCallQualityEventTypes.RemoteStatsUpdated
     },
     mediaDevices: {
       DEVICE_CHANGE: JitsiDevicesEventTypes.deviceListChanged
