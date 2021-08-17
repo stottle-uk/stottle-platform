@@ -1,5 +1,5 @@
 import React from 'react';
-import { useJitsiConference } from '../../../hooks/useJitsiConference';
+import { useJitsiConference } from '../../hooks/useJitsiConference';
 import Lobby from '../lobby/Lobby';
 import ConferenceLayout from './ConferenceLayout';
 

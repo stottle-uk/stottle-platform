@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useJitsiStats } from '../../../hooks/useJitsiStats';
+import { useJitsiStats } from '../../hooks/useJitsiStats';
 
 interface OwnProps {
   userId: string;

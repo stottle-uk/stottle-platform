@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useJitsiActions } from '../../../hooks/useJitsiActions';
+import { useJitsiActions } from '../../hooks/useJitsiActions';
 
 interface OwnProps extends React.HTMLAttributes<HTMLDivElement> {
   userId: string;

@@ -1,5 +1,5 @@
 import React, { FormEvent } from 'react';
-import { useJitsiPassword } from '../../../hooks/useJitsiPassword';
+import { useJitsiPassword } from '../../hooks/useJitsiPassword';
 
 interface OwnProps {
   joinConference: (username: string, password?: string) => void;

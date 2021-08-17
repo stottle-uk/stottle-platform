@@ -3,8 +3,8 @@ import {
   JitsiTrack
 } from '@stottle-platform/lib-jitsi-meet';
 import React from 'react';
-import { useJitsiDevices } from '../../../hooks/useJitsiDevices';
-import { useMutedSate } from '../../../hooks/useMutedState';
+import { useJitsiDevices } from '../../hooks/useJitsiDevices';
+import { useMutedSate } from '../../hooks/useMutedState';
 import CallButton from './CallButton';
 
 interface OwnProps {

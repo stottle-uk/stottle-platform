@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useJitsiActions } from '../../../hooks/useJitsiActions';
-import { useJitsiConference } from '../../../hooks/useJitsiConference';
-import { useJitsiDevices } from '../../../hooks/useJitsiDevices';
-import { useJitsiPassword } from '../../../hooks/useJitsiPassword';
-import { useJitsiTracks } from '../../../hooks/useJitsiTracks';
+import { useJitsiActions } from '../../hooks/useJitsiActions';
+import { useJitsiConference } from '../../hooks/useJitsiConference';
+import { useJitsiDevices } from '../../hooks/useJitsiDevices';
+import { useJitsiPassword } from '../../hooks/useJitsiPassword';
+import { useJitsiTracks } from '../../hooks/useJitsiTracks';
 import Settings from '../settings/Settings';
 import ToolbarInner from './ToolbarInner';
 
