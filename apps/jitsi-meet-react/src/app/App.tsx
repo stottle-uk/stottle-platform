@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { environment } from '../environments/environment';
-import { useJitsiConnection } from './conference/hooks/useJitsiConnection';
+import { useJitsiConnection } from './hooks/useJitsiConnection';
 import ConferenceContainer from './layout/components/conference/ConferenceContainer';
 
 const connectionOptions = {

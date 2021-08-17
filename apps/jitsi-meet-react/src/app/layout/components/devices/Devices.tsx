@@ -1,6 +1,6 @@
 import React from 'react';
-import { useJitsiDevices } from '../../../conference/hooks/useJitsiDevices';
-import { useJitsiTracks } from '../../../conference/hooks/useJitsiTracks';
+import { useJitsiDevices } from '../../../hooks/useJitsiDevices';
+import { useJitsiTracks } from '../../../hooks/useJitsiTracks';
 import DevicesLayout from './DevicesLayout';
 
 const Devices: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useJitsiTracks } from '../../../conference/hooks/useJitsiTracks';
+import { useJitsiTracks } from '../../../hooks/useJitsiTracks';
 import GridControls from './GridControls';
 import GridFooter from './GridFooter';
 import GridItem from './GridItem';
