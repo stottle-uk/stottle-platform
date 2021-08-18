@@ -19,7 +19,7 @@ export class JitsiChatStateService {
         values =>
           new SetChatMessages({
             message: values.value,
-            authorId: parseInt(`${values.attributes.authorId}`),
+            authorId: +values.attributes.authorId,
             authorName: `${values.attributes.authorName}`
           })
       ),

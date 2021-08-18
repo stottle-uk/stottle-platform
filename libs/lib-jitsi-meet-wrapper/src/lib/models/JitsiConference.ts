@@ -29,7 +29,7 @@ export interface JitsiConference
   sendTextMessage(text: string): void;
   setDisplayName(name: string): void;
   selectParticipant(participantId: string): void;
-  sendCommand(name: string, values: unknown): void;
+  sendCommand(name: string, values: JitsiCommandValues): void;
   sendCommandOnce: this['sendCommand'];
   removeCommand(name: string): void;
   addCommandListener(

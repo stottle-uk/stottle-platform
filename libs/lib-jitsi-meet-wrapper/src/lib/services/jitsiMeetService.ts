@@ -231,7 +231,7 @@ export class JitsiMeetService {
     );
   }
 
-  sendCommandOnce(name: string, values: unknown) {
+  sendCommandOnce(name: string, values: JitsiCommandValues) {
     return this.confInner$.pipe(
       take(1),
       tap(conf => conf.sendCommandOnce(name, values))

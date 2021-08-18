@@ -12,7 +12,7 @@ export type TrackType = 'audio' | 'video' | 'desktop';
 export interface JitsiCommandValues {
   value: string;
   attributes: Record<string, string | number | boolean>;
-  children: [];
+  children?: JitsiCommandValues[];
 }
 
 export interface JitsiEventEmitter<E> {
