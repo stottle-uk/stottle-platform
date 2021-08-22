@@ -37,8 +37,9 @@ export class JitsiUsersStateService {
         this.stateInner$.next(new RemoveUser(event.payload[0]));
         break;
       case JitsiConferenceEventTypes.UserJoined:
-        const [userId, user] = event.payload;
-        this.stateInner$.next(new AddUser({ userId, user }));
+        this.stateInner$.next(
+          new AddUser({ userId: event.payload[0], user: event.payload[1] })
+        );
         break;
     }
   }

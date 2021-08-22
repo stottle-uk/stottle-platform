@@ -57,9 +57,11 @@ export class JitsiConferenceStateService {
   private handleEvents(event: JitsiConferenceEvents) {
     switch (event.type) {
       case JitsiConferenceEventTypes.AuthStatusChanged:
-        const [authEnabled, authIdentity] = event.payload;
         this.stateInner$.next(
-          new AuthStatusChanged({ authEnabled, authIdentity })
+          new AuthStatusChanged({
+            authEnabled: event.payload[0],
+            authIdentity: event.payload[1]
+          })
         );
         break;
       case JitsiConferenceEventTypes.CreatedTimestamp:
