@@ -228,10 +228,14 @@ describe('JitsiMeetService', () => {
   });
 
   test('sendCommandOnce()', done => {
-    service.sendCommandOnce('messageType', 'messageData').subscribe(() => {
+    const message = {
+      attributes: {},
+      value: ''
+    };
+    service.sendCommandOnce('messageType', message).subscribe(() => {
       expect(ConferenceMock.prototype.sendCommandOnce).toHaveBeenCalledWith(
         'messageType',
-        'messageData'
+        message
       );
       done();
     });
