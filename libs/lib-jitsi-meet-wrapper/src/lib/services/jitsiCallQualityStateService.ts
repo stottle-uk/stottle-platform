@@ -1,4 +1,4 @@
-import { merge, ReplaySubject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
@@ -26,7 +26,7 @@ export class JitsiCallQualityStateService {
     tap(event => this.handleEvents(event))
   );
 
-  private stateInner$ = new ReplaySubject<CallQualityStateActions>(1);
+  private stateInner$ = new Subject<CallQualityStateActions>();
   state$ = this.stateInner$.pipe(
     scanState(callQualityReducer, callQualityInitialState)
   );
@@ -34,7 +34,7 @@ export class JitsiCallQualityStateService {
   constructor(private jitsiService: JitsiMeetService) {}
 
   init() {
-    merge(this.events$).subscribe();
+    return merge(this.events$, this.state$);
   }
 
   private handleEvents(event: JitsiCallQualityEvents) {
@@ -45,8 +45,12 @@ export class JitsiCallQualityStateService {
         this.stateInner$.next(new LocalStatsUpdated(event.payload));
         break;
       case JitsiCallQualityEventTypes.RemoteStatsUpdated:
-        const [userId, stats] = event.payload;
-        this.stateInner$.next(new RemoteStatsUpdated({ userId, stats }));
+        this.stateInner$.next(
+          new RemoteStatsUpdated({
+            userId: event.payload[0],
+            stats: event.payload[1]
+          })
+        );
         break;
     }
   }

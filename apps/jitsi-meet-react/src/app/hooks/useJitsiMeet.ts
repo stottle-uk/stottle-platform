@@ -10,7 +10,8 @@ import {
   JitsiTracksStateService,
   JitsiUsersStateService
 } from '@stottle-platform/lib-jitsi-meet';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
+import { merge } from 'rxjs';
 
 const { JitsiMeetJS } = window;
 JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
@@ -35,15 +36,6 @@ const jitsiCallQualityStateService = new JitsiCallQualityStateService(
   jitsiMeetService
 );
 
-connectionStateService.init();
-conferenceStateService.init();
-usersStateService.init();
-devicesStateService.init();
-tracksStateService.init();
-jitsiStatsStateService.init();
-jitsiPasswordStateService.init();
-jitsiCallQualityStateService.init();
-
 const JitsiContext = createContext(jitsiMeetService);
 const ConnectionStateContext = createContext(connectionStateService);
 const ConferenceStateContext = createContext(conferenceStateService);
@@ -56,7 +48,6 @@ const PasswordStateContext = createContext(jitsiPasswordStateService);
 const CallQualityContext = createContext(jitsiCallQualityStateService);
 
 export const useJitsiMeet = () => useContext(JitsiContext);
-export const useJitsiConnectionState = () => useContext(ConnectionStateContext);
 export const useJitsiConferenceState = () => useContext(ConferenceStateContext);
 export const useJitsiUsersState = () => useContext(UsersStateContext);
 export const useJitsiDevicesState = () => useContext(DevicesStateContext);
@@ -65,3 +56,35 @@ export const useJitsiChatState = () => useContext(ChatStateService);
 export const useJitsiStatsState = () => useContext(StatsStateContext);
 export const useJitsiPasswordState = () => useContext(PasswordStateContext);
 export const useJitsiCallQualityState = () => useContext(CallQualityContext);
+
+export const useJitsiConnectionState = () => {
+  const jitsi = useJitsiMeet();
+  const conn = useContext(ConnectionStateContext);
+  const conf = useJitsiConferenceState();
+  const users = useJitsiUsersState();
+  const devices = useJitsiDevicesState();
+  const tracks = useJitsiTracksState();
+  const stats = useJitsiStatsState();
+  const password = useJitsiPasswordState();
+  const quality = useJitsiCallQualityState();
+
+  useEffect(() => {
+    const subs = merge(
+      conn.init(),
+      conf.init(),
+      users.init(),
+      devices.init(),
+      tracks.init(),
+      stats.init(),
+      password.init(),
+      quality.init()
+    ).subscribe();
+
+    return () => {
+      subs.unsubscribe();
+      jitsi.dispose();
+    };
+  }, [conn, conf, users, devices, tracks, stats, password, quality, jitsi]);
+
+  return conn;
+};

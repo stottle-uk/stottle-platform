@@ -2,17 +2,11 @@ import { JitsiParticipant } from '../../models/JitsiParticipant';
 import { UsersStateActions, UsersStateActionTypes } from './usersActions';
 
 export interface UsersState {
-  isConnected: boolean;
-  wasKicked: boolean;
-  hasLeftRoom: boolean;
   users: Record<string, JitsiParticipant>;
   userIds: string[];
 }
 
 export const usersInitialState: UsersState = {
-  isConnected: false,
-  wasKicked: false,
-  hasLeftRoom: false,
   users: {},
   userIds: []
 };
@@ -33,6 +27,7 @@ export const usersReducer = (
       };
 
     case UsersStateActionTypes.RemoveUser:
+      // eslint-disable-next-line no-case-declarations
       const userIds = state.userIds.filter(id => id !== action.payload);
 
       return {

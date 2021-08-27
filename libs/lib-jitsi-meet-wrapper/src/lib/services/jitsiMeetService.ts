@@ -56,8 +56,8 @@ const defaultTracksOptions = {
 
 export class JitsiMeetService {
   private destroy$ = new Subject();
-  private connInner$ = new ReplaySubject<JitsiConnection>(1);
-  private confInner$ = new ReplaySubject<JitsiConference>(1);
+  private connInner$ = new ReplaySubject<JitsiConnection>();
+  private confInner$ = new ReplaySubject<JitsiConference>();
 
   constructor(private jitsiMeet: JitsiMeetJS) {}
 

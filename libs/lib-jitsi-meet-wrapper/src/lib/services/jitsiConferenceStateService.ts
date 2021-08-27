@@ -1,4 +1,4 @@
-import { merge, ReplaySubject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
@@ -35,7 +35,7 @@ export class JitsiConferenceStateService {
     tap(event => this.handleEvents(event))
   );
 
-  private stateInner$ = new ReplaySubject<ConferenceStateActions>(1);
+  private stateInner$ = new Subject<ConferenceStateActions>();
   state$ = this.stateInner$.pipe(
     scanState(conferenceReducer, conferenceInitialState)
   );
@@ -43,7 +43,7 @@ export class JitsiConferenceStateService {
   constructor(private jitsiService: JitsiMeetService) {}
 
   init() {
-    merge(this.userLeft$, this.events$).subscribe();
+    return merge(this.userLeft$, this.events$, this.state$);
   }
 
   joinConference(username: string, password?: string) {

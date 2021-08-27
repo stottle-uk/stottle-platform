@@ -1,4 +1,4 @@
-import { merge, ReplaySubject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
@@ -22,13 +22,13 @@ export class JitsiUsersStateService {
     tap(event => this.handleEvents(event))
   );
 
-  private stateInner$ = new ReplaySubject<UsersStateActions>(1);
+  private stateInner$ = new Subject<UsersStateActions>();
   state$ = this.stateInner$.pipe(scanState(usersReducer, usersInitialState));
 
   constructor(private jitsiService: JitsiMeetService) {}
 
   init() {
-    merge(this.events$).subscribe();
+    return merge(this.events$, this.state$);
   }
 
   private handleEvents(event: JitsiConferenceEvents) {

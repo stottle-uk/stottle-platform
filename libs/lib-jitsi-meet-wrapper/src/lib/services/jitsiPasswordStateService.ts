@@ -1,4 +1,4 @@
-import { ReplaySubject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
@@ -24,7 +24,7 @@ export class JitsiPasswordStateService {
     tap(event => this.handleEvents(event))
   );
 
-  private stateInner$ = new ReplaySubject<PasswordStateActions>(1);
+  private stateInner$ = new Subject<PasswordStateActions>();
   state$ = this.stateInner$.pipe(
     scanState(passwordReducer, passwordInitialState)
   );
@@ -32,7 +32,7 @@ export class JitsiPasswordStateService {
   constructor(private jitsiService: JitsiMeetService) {}
 
   init() {
-    this.events$.subscribe();
+    return merge(this.events$, this.state$);
   }
 
   lockRoom(password: string) {

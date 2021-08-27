@@ -1,4 +1,4 @@
-import { merge, ReplaySubject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
@@ -23,7 +23,7 @@ export class JitsiDevicesStateService {
     tap(event => this.handleEvents(event))
   );
 
-  private stateInner$ = new ReplaySubject<DevicesStateActions>(1);
+  private stateInner$ = new Subject<DevicesStateActions>();
   state$ = this.stateInner$.pipe(
     scanState(devicesReducer, devicesInitialState)
   );
@@ -31,7 +31,7 @@ export class JitsiDevicesStateService {
   constructor(private jitsiService: JitsiMeetService) {}
 
   init() {
-    merge(this.devices$, this.events$).subscribe();
+    return merge(this.devices$, this.events$, this.state$);
   }
 
   setAudioOutDevice(deviceId: string) {

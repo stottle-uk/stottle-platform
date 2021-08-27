@@ -1,4 +1,4 @@
-import { merge, ReplaySubject, Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
@@ -30,13 +30,15 @@ export class JitsiConnectionStateService {
       this.jitsiService.initConference(roomname, confOptions)
     )
   );
-
   private events$ = this.jitsiService.connectionEvents$.pipe(
-    typeOf(JitsiConnectionEventTypes.ConnectionEstablished),
+    typeOf(
+      JitsiConnectionEventTypes.ConnectionEstablished,
+      JitsiConnectionEventTypes.ConnectionDisconnected
+    ),
     tap(event => this.handleEvents(event))
   );
 
-  private stateInner$ = new ReplaySubject<ConnectionStateActions>(1);
+  private stateInner$ = new Subject<ConnectionStateActions>();
   state$ = this.stateInner$.pipe(
     scanState(connectionReducer, connectionInitialState)
   );
@@ -44,7 +46,7 @@ export class JitsiConnectionStateService {
   constructor(private jitsiService: JitsiMeetService) {}
 
   init() {
-    merge(this.events$, this.initConference$).subscribe();
+    return merge(this.events$, this.initConference$, this.state$);
   }
 
   connect(
@@ -75,6 +77,9 @@ export class JitsiConnectionStateService {
       case JitsiConnectionEventTypes.ConnectionEstablished:
         this.stateInner$.next(new SetConnected(true));
         this.stateInner$.next(new SetIsConnecting(false));
+        break;
+      case JitsiConnectionEventTypes.ConnectionDisconnected:
+        this.stateInner$.next(new SetConnected(false));
         break;
     }
   }
