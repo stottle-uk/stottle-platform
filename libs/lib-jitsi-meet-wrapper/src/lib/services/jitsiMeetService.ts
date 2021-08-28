@@ -12,7 +12,7 @@ import {
   catchError,
   map,
   mergeMap,
-  shareReplay,
+  share,
   switchMap,
   take,
   takeUntil,
@@ -71,7 +71,7 @@ export class JitsiMeetService {
       )
     ),
     // tap(d => console.log('connectionEvents', d)),
-    shareReplay(1),
+    share(),
     takeUntil(this.destroy$)
   );
 
@@ -87,7 +87,7 @@ export class JitsiMeetService {
       ).pipe(map(e => this.mapJoinedEvent(conf, e)))
     ),
     // tap(d => console.log('conferenceEvents', d)),
-    shareReplay(1),
+    share(),
     takeUntil(this.destroy$)
   );
 
@@ -100,7 +100,7 @@ export class JitsiMeetService {
       )
     ),
     // tap(d => console.log('connectionQualityEvents', d)),
-    shareReplay(1),
+    share(),
     takeUntil(this.destroy$)
   );
 
@@ -108,7 +108,7 @@ export class JitsiMeetService {
     ...Object.values({
       ...this.jitsiMeet.events.mediaDevices
     }).map(e => this.createListener(this.jitsiMeet.mediaDevices, e))
-  ).pipe(shareReplay(1), takeUntil(this.destroy$));
+  ).pipe(share(), takeUntil(this.destroy$));
 
   devices$ = new Observable<MediaDeviceInfo[]>(observer =>
     this.jitsiMeet.mediaDevices.enumerateDevices(info => {
