@@ -11,6 +11,9 @@ declare global {
     $: typeof jQuery;
     JitsiMeetJS: JitsiMeetJS;
   }
+  interface MediaDevices {
+    getDisplayMedia(constraints?: MediaStreamConstraints): Promise<MediaStream>;
+  }
 }
 
 window.$ = jQuery;

@@ -18,12 +18,6 @@ export const tracksReducer = (
   action: TracksStateActions
 ): TracksState => {
   switch (action.type) {
-    case TracksStateActionTypes.SetLocalTracks:
-      return {
-        ...state,
-        localTracks: action.payload
-      };
-
     case TracksStateActionTypes.AddTrack:
       if (action.payload.isLocal()) {
         return {
@@ -53,6 +47,7 @@ export const tracksReducer = (
         };
       }
 
+      // eslint-disable-next-line no-case-declarations
       const { [action.payload.getParticipantId()]: tracks } =
         state.remoteTracks;
       return {

@@ -4,13 +4,7 @@ import { JitsiTrack } from '../../models/JitsiTrack';
 export enum TracksStateActionTypes {
   AddTrack = 'AddTrack',
   RemoveTrack = 'RemoveTrack',
-  RemoveAllTracks = 'RemoveAllTracks',
-  SetLocalTracks = 'SetLocalTracks'
-}
-
-export class SetLocalTracks implements Action {
-  readonly type = TracksStateActionTypes.SetLocalTracks;
-  constructor(public payload: JitsiTrack[]) {}
+  RemoveAllTracks = 'RemoveAllTracks'
 }
 
 export class AddTrack implements Action {
@@ -28,8 +22,4 @@ export class RemoveAllTracks implements Action {
   constructor(public payload = null) {}
 }
 
-export type TracksStateActions =
-  | SetLocalTracks
-  | AddTrack
-  | RemoveTrack
-  | RemoveAllTracks;
+export type TracksStateActions = AddTrack | RemoveTrack | RemoveAllTracks;

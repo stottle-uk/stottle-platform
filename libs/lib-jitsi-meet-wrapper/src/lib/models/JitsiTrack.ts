@@ -37,5 +37,11 @@ export interface JitsiTrack extends JitsiEventEmitter<JitsiTrack> {
   setAudioOutput(audioOutputDeviceId: string): void;
   getDeviceId(): string;
   isEnded(): boolean;
-  setEffect(effect: unknown): void;
+  setEffect(effect?: JitsiTrackEffect): void;
+}
+
+export interface JitsiTrackEffect {
+  startEffect(stream: MediaStream): MediaStream;
+  stopEffect(): void;
+  isEnabled(track: JitsiTrack): boolean;
 }
