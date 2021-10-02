@@ -43,7 +43,11 @@ const Grid: React.FC = () => {
                 userId={user.userId}
               />
               {!user.isLocal && (
-                <GridControls className="grid-controls" userId={user.userId} />
+                <GridControls
+                  className="grid-controls"
+                  userId={user.userId}
+                  setFocusedUser={updateFocusedUser}
+                />
               )}
             </GridItem>
           )

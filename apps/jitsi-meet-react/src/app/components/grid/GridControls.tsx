@@ -4,9 +4,14 @@ import { useJitsiActions } from '../../hooks/useJitsiActions';
 
 interface OwnProps extends React.HTMLAttributes<HTMLDivElement> {
   userId: string;
+  setFocusedUser: (userId: string) => void;
 }
 
-const GridControls: React.FC<OwnProps> = ({ userId, ...props }) => {
+const GridControls: React.FC<OwnProps> = ({
+  userId,
+  setFocusedUser,
+  ...props
+}) => {
   const { kickParticipant, muteParticipant } = useJitsiActions();
 
   return (
@@ -16,6 +21,7 @@ const GridControls: React.FC<OwnProps> = ({ userId, ...props }) => {
       </button>
       <div>
         {/* <button onClick={() => muteParticipant(userId, 'video')}>V</button> */}
+        <button onClick={() => setFocusedUser(userId)}>Toggle Focus</button>
         <button onClick={() => muteParticipant(userId, 'audio')}>
           Mute Audio
         </button>
