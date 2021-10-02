@@ -18,12 +18,12 @@
   align-content: center;
   align-items: center;
   flex-flow: row wrap;
-  height: 100vh;
+  height: calc(100vh - 32px);
+  width: calc(100vw - 32px);
 
   .grid-item {
     overflow: hidden;
     position: relative;
-    margin: 16px;
     flex: 1;
     aspect-ratio: 16 / 9;
     font-size: 12px;
