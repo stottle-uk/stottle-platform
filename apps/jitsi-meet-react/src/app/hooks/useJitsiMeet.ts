@@ -14,7 +14,7 @@ import { createContext, useContext, useEffect } from 'react';
 import { merge } from 'rxjs';
 
 const { JitsiMeetJS } = window;
-JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
+JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.INFO);
 JitsiMeetJS.init();
 
 const jitsiMeetService = new JitsiMeetService(JitsiMeetJS);
