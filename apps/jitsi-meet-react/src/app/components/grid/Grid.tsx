@@ -18,8 +18,6 @@ const Grid: React.FC = () => {
     focusedUser ? 'grid-focused' : `grid-${participantsLength}`
   }`;
 
-  console.log(focusedUser);
-
   return (
     <div className={gridClass}>
       {allTracks.map(
