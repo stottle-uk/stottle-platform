@@ -9,56 +9,73 @@
     overflow: hidden;
     position: relative;
     display: block;
+  }
+}
 
-    &.hidden {
-      display: none;
-    }
+.grid-focused {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  height: 100vh;
 
-    &.vid-contain {
+  .grid-item {
+    overflow: hidden;
+    position: relative;
+    margin: 16px;
+    flex: 1;
+    aspect-ratio: 16 / 9;
+
+    &.box-focused {
+      order: -1;
+      flex: 0 0 100%;
+      max-height: 70%;
+
       video {
         object-fit: contain;
       }
     }
-
-    .grid-video {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      background-color: #111;
-      border: 1px solid #000;
-      align-items: center;
-      justify-content: center;
-
-      &.hidden {
-        visibility: hidden;
-        height: 0;
-        width: 0;
-      }
-
-      p {
-        color: #eee;
-      }
-    }
-
-    .grid-footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-
-      p {
-        color: #fff;
-        padding-left: 12px;
-      }
-    }
-
-    .grid-controls {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-    }
   }
+}
+
+.grid-video {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #111;
+  border: 1px solid #000;
+  align-items: center;
+  justify-content: center;
+
+  &.hidden {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+
+  p {
+    color: #eee;
+  }
+}
+
+.grid-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+
+  p {
+    color: #fff;
+    padding-left: 12px;
+  }
+}
+
+.grid-controls {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 .grid-controls {
@@ -118,12 +135,29 @@
   grid-template-rows: repeat(1, 1fr);
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: 'box1 box2';
+
+  @media (orientation: portrait) {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas:
+      'box1'
+      'box2';
+  }
 }
 
 .grid-3 {
   grid-template-rows: repeat(1, 1fr);
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas: 'box1 box2 box3';
+
+  @media (orientation: portrait) {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas:
+      'box1'
+      'box2'
+      'box3';
+  }
 }
 
 .grid-4 {
@@ -279,10 +313,4 @@
     'box6 box7 box8 box9 box10'
     'box11 box12 box13 box14 box15'
     'box16 box17 box18 box19 box20';
-}
-
-.grid-focused {
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr;
-  grid-template-areas: 'boxFocused';
 }

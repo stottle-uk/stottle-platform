@@ -38,8 +38,6 @@ export class JitsiCallQualityStateService {
   }
 
   private handleEvents(event: JitsiCallQualityEvents) {
-    console.log(event);
-
     switch (event.type) {
       case JitsiCallQualityEventTypes.LocalStatsUpdated:
         this.stateInner$.next(new LocalStatsUpdated(event.payload));

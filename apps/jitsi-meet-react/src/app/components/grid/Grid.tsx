@@ -8,13 +8,8 @@ const Grid: React.FC = () => {
   const { allTracks, participantsLength } = useJitsiTracks('ME!');
   const [focusedUser, setFocusedUser] = useState<string>();
 
-  const getItemStyle = (userId: string, i: number) =>
-    focusedUser === userId ? 'boxFocused' : `box${i + 1}`;
-
-  const getItemClass = (focusedUser: string | undefined, userId: string) =>
-    `grid-item ${focusedUser && focusedUser !== userId ? 'hidden' : ''} ${
-      focusedUser === userId ? 'vid-contain' : ''
-    }`;
+  const getGridItemStyle = (userId: string) =>
+    focusedUser === userId ? 'grid-item box-focused' : `grid-item`;
 
   const updateFocusedUser = (userId: string) =>
     setFocusedUser(id => (id === userId ? undefined : userId));
@@ -22,6 +17,8 @@ const Grid: React.FC = () => {
   const gridClass = `grid-container ${
     focusedUser ? 'grid-focused' : `grid-${participantsLength}`
   }`;
+
+  console.log(focusedUser);
 
   return (
     <div className={gridClass}>
@@ -31,9 +28,9 @@ const Grid: React.FC = () => {
           user.tracks.video && (
             <GridItem
               key={user.userId}
-              className={getItemClass(focusedUser, user.userId)}
+              className={getGridItemStyle(user.userId)}
               style={{
-                gridArea: getItemStyle(user.userId, i)
+                gridArea: `box${i + 1}`
               }}
               username={user.username}
               audio={user.tracks.audio}
