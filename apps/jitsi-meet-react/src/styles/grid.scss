@@ -27,16 +27,17 @@
     flex: 1;
     aspect-ratio: 16 / 9;
     font-size: 12px;
+    max-height: 20%;
+
+    video {
+      object-fit: contain;
+    }
 
     &.box-focused {
       order: -1;
       flex: 0 0 100%;
-      max-height: 70%;
+      max-height: 80%;
       font-size: inherit;
-
-      video {
-        object-fit: contain;
-      }
     }
   }
 }
