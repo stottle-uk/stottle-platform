@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "calander-test": {
+      "tags": []
+    },
     "jitsi-meet-react": {
       "tags": []
     },
