@@ -20,7 +20,7 @@ export const mapDate: MapFn = date => ({
   // offset: date.getTimezoneOffset(),
   dateString: date.toDateString(),
   // toUTCString: date.toUTCString(),
-  // toISOString: date.toISOString(),
+  toISOString: date.toISOString(),
   toString: date.toString()
 });
 
@@ -31,6 +31,7 @@ export const App: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState(date.getMonth() + 1);
   const [selectedkey, setSelectedKey] = useState<string>('evening');
   const [selectedDate, setSelectedDate] = useState<Date>();
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
 
   const [calendar, setCalendar] = useState<CalendarObj>({});
 
@@ -40,12 +41,22 @@ export const App: React.FC = () => {
     }
   }, [selectedYear]);
 
-  const getClass = (currMonth: number, date: DateFormatted) =>
-    `${styles.app} ${currMonth === date.month ? '' : styles.fade} ` +
-    `${
-      date.dateString === selectedDate?.toDateString() ? styles.selected : ''
-    }`;
+  const getClass = (currMonth: number, date: DateFormatted) => {
+    console.log(date, selectedDays);
 
+    return (
+      `${styles.app} ${currMonth === date.month ? '' : styles.fade} ` +
+      `${
+        date.dateString === selectedDate?.toDateString() ? styles.selected : ''
+      }` +
+      ` ${
+        date.date &&
+        selectedDays.some(s => dayjs.default(s).isSame(date.date, 'day'))
+          ? styles.selectedDay
+          : ''
+      }`
+    );
+  };
   const renderBody = () => (
     <div>
       <select
@@ -108,8 +119,6 @@ export const App: React.FC = () => {
       </div>
       {renderCal()}
 
-      <p>idea: handle ctrl to select multiple days</p>
-
       {selectedDate && (
         <div className={styles.times}>
           <div className={styles.timesNav}>
@@ -130,15 +139,32 @@ export const App: React.FC = () => {
               val
                 .filter(() => key === selectedkey)
                 .map(v => (
-                  <div key={v.toString()}>{dayjs.default(v).format('LTS')}</div>
+                  <div
+                    key={v.toString()}
+                    className={
+                      selectedDays.includes(v.toISOString())
+                        ? styles.selectedTime
+                        : ''
+                    }
+                    onClick={() =>
+                      setSelectedDays(d =>
+                        d.includes(v.toISOString())
+                          ? d.filter(e => e !== v.toISOString())
+                          : [...d, v.toISOString()]
+                      )
+                    }
+                  >
+                    {dayjs.default(v).format('LTS')}
+                  </div>
                 ))
             )}
           </div>
         </div>
       )}
 
-      {/* <pre>{JSON.stringify(calendar, undefined, 2)}</pre> */}
+      <pre>{JSON.stringify(selectedDays, undefined, 2)}</pre>
       {/* <pre>{JSON.stringify(sdfsd(), undefined, 2)}</pre> */}
+      <p>idea: handle ctrl to select multiple days</p>
     </div>
   );
 };

@@ -92,7 +92,7 @@ export const sdfsd = (year = 2021, month = 10, day = 12) => {
       ],
       [] as stuff2[]
     )
-    .map(d => new Date(year, month - 1, day, d.hour, d.minutes));
+    .map(d => new Date(year, month, day, d.hour, d.minutes));
 
   return {
     morning: sdfsd.slice(16, 24),
@@ -100,9 +100,3 @@ export const sdfsd = (year = 2021, month = 10, day = 12) => {
     evening: sdfsd.slice(34, 44)
   };
 };
-
-function getStage(dat: stuff2) {
-  console.log(dat.hour % 8);
-
-  return 'dsfsd';
-}
