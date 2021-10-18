@@ -1,18 +1,35 @@
 import { useEffect, useState } from 'react';
 import styles from './app.module.scss';
-import { buildCalendar, DateFormatted, mapDate } from './calendar-helpers';
+import {
+  buildCalendar,
+  CalendarObj,
+  DateFormatted,
+  MapFn
+} from './calendar-helpers';
+
+export const mapDate: MapFn = date => ({
+  dayOfWeek: date.getDay(),
+  // day: date.getDate(),
+  month: date.getMonth() + 1,
+  // year: date.getFullYear(),
+  // offset: date.getTimezoneOffset(),
+  dateString: date.toDateString(),
+  // toUTCString: date.toUTCString(),
+  // toISOString: date.toISOString(),
+  toString: date.toString()
+});
 
 const date = new Date();
 
 export const App: React.FC = () => {
-  const [selectedYear, setSelectedYear] = useState(date.getFullYear());
+  const [selectedYear, setSelectedYear] = useState<number>(date.getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(date.getMonth() + 1);
-  const [calendar, setCalendar] = useState(
-    buildCalendar(selectedYear, selectedMonth, mapDate)
-  );
+  const [calendar, setCalendar] = useState<CalendarObj>({});
 
   useEffect(() => {
-    setCalendar(buildCalendar(selectedYear, 11, mapDate));
+    if (selectedYear) {
+      setCalendar(buildCalendar(selectedYear, 11, mapDate));
+    }
   }, [selectedYear]);
 
   const getClass = (currMonth: number, date: DateFormatted) =>

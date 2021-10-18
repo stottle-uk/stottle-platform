@@ -12,17 +12,7 @@ export type DateFormatted = {
 
 export type MapFn = (date: Date) => DateFormatted;
 
-export const mapDate: MapFn = date => ({
-  dayOfWeek: date.getDay(),
-  // day: date.getDate(),
-  month: date.getMonth() + 1,
-  // year: date.getFullYear(),
-  // offset: date.getTimezoneOffset(),
-  dateString: date.toDateString(),
-  // toUTCString: date.toUTCString(),
-  // toISOString: date.toISOString(),
-  toString: date.toString()
-});
+export type CalendarObj = Record<number, DateFormatted[]>;
 
 const updateMonthDays = (
   month: DateFormatted[],
@@ -73,7 +63,7 @@ export const buildCalendar = (year = 2021, month = 11, fn: MapFn) => {
         ...prev,
         [date.month]: [...(prev[date.month] || []), date]
       }),
-      {} as Record<number, DateFormatted[]>
+      {} as CalendarObj
     );
 
   Object.entries(calendar).forEach(
