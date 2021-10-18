@@ -41,22 +41,18 @@ export const App: React.FC = () => {
     }
   }, [selectedYear]);
 
-  const getClass = (currMonth: number, date: DateFormatted) => {
-    console.log(date, selectedDays);
+  const getClass = (currMonth: number, date: DateFormatted) =>
+    `${styles.app} ${currMonth === date.month ? '' : styles.fade} ` +
+    `${
+      date.dateString === selectedDate?.toDateString() ? styles.selected : ''
+    } ` +
+    `${
+      date.date &&
+      selectedDays.some(s => dayjs.default(s).isSame(date.date, 'day'))
+        ? styles.selectedDay
+        : ''
+    }`;
 
-    return (
-      `${styles.app} ${currMonth === date.month ? '' : styles.fade} ` +
-      `${
-        date.dateString === selectedDate?.toDateString() ? styles.selected : ''
-      }` +
-      ` ${
-        date.date &&
-        selectedDays.some(s => dayjs.default(s).isSame(date.date, 'day'))
-          ? styles.selectedDay
-          : ''
-      }`
-    );
-  };
   const renderBody = () => (
     <div>
       <select
