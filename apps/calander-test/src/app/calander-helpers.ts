@@ -1,4 +1,4 @@
-export type DATSTUFF = {
+export type DateFormatted = {
   dayOfWeek: number;
   day?: number;
   month: number;
@@ -10,7 +10,9 @@ export type DATSTUFF = {
   toString: string;
 };
 
-export const mapDate = (date: Date): DATSTUFF => ({
+export type MapFn = (date: Date) => DateFormatted;
+
+export const mapDate: MapFn = date => ({
   dayOfWeek: date.getDay(),
   // day: date.getDate(),
   month: date.getMonth() + 1,
@@ -23,12 +25,14 @@ export const mapDate = (date: Date): DATSTUFF => ({
 });
 
 const updateMonthDays = (
-  month: DATSTUFF[],
-  theDate: Date,
-  fn: typeof mapDate
-): DATSTUFF[] => {
+  month: DateFormatted[],
+  year: number,
+  fn: MapFn
+): DateFormatted[] => {
   const daysAtStart = month[0].dayOfWeek - 1;
   const daysAtEnd = month[month.length - 1].dayOfWeek;
+  const startMonth = month[0].month - 1;
+  const endMonth = month[month.length - 1].month;
 
   const diff1 = daysAtStart > 0 ? daysAtStart : 7 + daysAtStart;
   const diff = daysAtEnd > 0 ? 7 - daysAtEnd : 0;
@@ -40,38 +44,25 @@ const updateMonthDays = (
 
   // console.log(month, { daysAtStart, daysAtEnd, startDays, endDays, diff1 });
   return [
-    ...startDays
-      .map(
-        dayOffset =>
-          new Date(theDate.getFullYear(), month[0].month - 1, dayOffset)
-      )
-      .map(fn),
+    ...startDays.map(offset => new Date(year, startMonth, offset)).map(fn),
     ...month,
-    ...endDays
-      .map(
-        dayOffset =>
-          new Date(
-            theDate.getFullYear(),
-            month[month.length - 1].month,
-            dayOffset
-          )
-      )
-      .map(fn)
+    ...endDays.map(offSet => new Date(year, endMonth, offSet)).map(fn)
   ];
 };
 
-export const buildCalander = (year = 2021, month = 11, fn: typeof mapDate) => {
-  const daysIntoYear = (date: Date) =>
-    (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
-      Date.UTC(date.getFullYear(), 0, 0)) /
-    24 /
-    60 /
-    60 /
-    1000;
+const daysIntoYear = (date: Date) =>
+  (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
+    Date.UTC(date.getFullYear(), 0, 0)) /
+  24 /
+  60 /
+  60 /
+  1000;
 
+export const buildCalander = (year = 2021, month = 11, fn: MapFn) => {
   const theDate = new Date(year, month, 31);
 
   const daysInYear = daysIntoYear(theDate);
+
   const calander = [...new Array(daysInYear).keys()]
     .map(i => i + 1)
     .map(dayOfYear => new Date(theDate.getFullYear(), 0, dayOfYear))
@@ -81,12 +72,12 @@ export const buildCalander = (year = 2021, month = 11, fn: typeof mapDate) => {
         ...prev,
         [date.month]: [...(prev[date.month] || []), date]
       }),
-      {} as Record<number, DATSTUFF[]>
+      {} as Record<number, DateFormatted[]>
     );
 
   Object.entries(calander).forEach(
     ([month, monthArr]) =>
-      (calander[+month] = updateMonthDays(monthArr, theDate, fn))
+      (calander[+month] = updateMonthDays(monthArr, theDate.getFullYear(), fn))
   );
 
   return calander;

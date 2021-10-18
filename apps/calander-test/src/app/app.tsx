@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import styles from './app.module.scss';
-import { buildCalander, DATSTUFF, mapDate } from './calander-helpers';
+import { buildCalander, DateFormatted, mapDate } from './calander-helpers';
+
+const date = new Date();
 
 export const App: React.FC = () => {
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(date.getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(date.getMonth() + 1);
   const [calander, setClander] = useState(
     buildCalander(selectedYear, selectedMonth, mapDate)
   );
@@ -13,8 +15,8 @@ export const App: React.FC = () => {
     setClander(buildCalander(selectedYear, 11, mapDate));
   }, [selectedYear]);
 
-  const getClass = (currMonth: number, val: DATSTUFF) =>
-    `${styles.app} ${currMonth === val.month ? '' : styles.fade}`;
+  const getClass = (currMonth: number, date: DateFormatted) =>
+    `${styles.app} ${currMonth === date.month ? '' : styles.fade}`;
 
   return (
     <div>
@@ -44,8 +46,8 @@ export const App: React.FC = () => {
         .filter(([key]) => +key === selectedMonth)
         .map(([key, d]) => (
           <div className={styles.app} key={key}>
-            {d.map((f, j) => (
-              <div key={j} className={getClass(+key, f)}>
+            {d.map(f => (
+              <div key={f.toString} className={getClass(+key, f)}>
                 {f.dateString}
               </div>
             ))}
