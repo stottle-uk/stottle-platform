@@ -59,7 +59,7 @@ export const App: React.FC = () => {
         <input type="text" step="1800" />
         <input type="text" step="1800" />
       </div>
-      {/* <pre>{JSON.stringify(days, undefined, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(calander, undefined, 2)}</pre> */}
     </div>
   );
 };

@@ -189,41 +189,6 @@ describe('Calander', () => {
       '2': [
         {
           dayOfWeek: 1,
-          month: 1,
-          toString: 'Mon Jan 25 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 2,
-          month: 1,
-          toString: 'Tue Jan 26 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 3,
-          month: 1,
-          toString: 'Wed Jan 27 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 4,
-          month: 1,
-          toString: 'Thu Jan 28 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 5,
-          month: 1,
-          toString: 'Fri Jan 29 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 6,
-          month: 1,
-          toString: 'Sat Jan 30 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 0,
-          month: 1,
-          toString: 'Sun Jan 31 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 1,
           month: 2,
           toString: 'Mon Feb 01 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
         },
@@ -364,41 +329,6 @@ describe('Calander', () => {
         }
       ],
       '3': [
-        {
-          dayOfWeek: 1,
-          month: 2,
-          toString: 'Mon Feb 22 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 2,
-          month: 2,
-          toString: 'Tue Feb 23 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 3,
-          month: 2,
-          toString: 'Wed Feb 24 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 4,
-          month: 2,
-          toString: 'Thu Feb 25 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 5,
-          month: 2,
-          toString: 'Fri Feb 26 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 6,
-          month: 2,
-          toString: 'Sat Feb 27 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
-        {
-          dayOfWeek: 0,
-          month: 2,
-          toString: 'Sun Feb 28 2021 00:00:00 GMT+0000 (Greenwich Mean Time)'
-        },
         {
           dayOfWeek: 1,
           month: 3,
@@ -1885,41 +1815,6 @@ describe('Calander', () => {
         }
       ],
       '11': [
-        {
-          dayOfWeek: 1,
-          month: 10,
-          toString: 'Mon Oct 25 2021 00:00:00 GMT+0100 (British Summer Time)'
-        },
-        {
-          dayOfWeek: 2,
-          month: 10,
-          toString: 'Tue Oct 26 2021 00:00:00 GMT+0100 (British Summer Time)'
-        },
-        {
-          dayOfWeek: 3,
-          month: 10,
-          toString: 'Wed Oct 27 2021 00:00:00 GMT+0100 (British Summer Time)'
-        },
-        {
-          dayOfWeek: 4,
-          month: 10,
-          toString: 'Thu Oct 28 2021 00:00:00 GMT+0100 (British Summer Time)'
-        },
-        {
-          dayOfWeek: 5,
-          month: 10,
-          toString: 'Fri Oct 29 2021 00:00:00 GMT+0100 (British Summer Time)'
-        },
-        {
-          dayOfWeek: 6,
-          month: 10,
-          toString: 'Sat Oct 30 2021 00:00:00 GMT+0100 (British Summer Time)'
-        },
-        {
-          dayOfWeek: 0,
-          month: 10,
-          toString: 'Sun Oct 31 2021 00:00:00 GMT+0100 (British Summer Time)'
-        },
         {
           dayOfWeek: 1,
           month: 11,

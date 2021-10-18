@@ -29,20 +29,21 @@ const updateMonthDays = (
   year: number,
   fn: MapFn
 ): DateFormatted[] => {
-  const daysAtStart = month[0].dayOfWeek - 1;
+  const daysAtStart = month[0].dayOfWeek;
   const daysAtEnd = month[month.length - 1].dayOfWeek;
   const startMonth = month[0].month - 1;
   const endMonth = month[month.length - 1].month;
 
-  const diff1 = daysAtStart > 0 ? daysAtStart : 7 + daysAtStart;
-  const diff = daysAtEnd > 0 ? 7 - daysAtEnd : 0;
+  const diffStart =
+    daysAtStart === 0 ? 6 : daysAtStart === 1 ? 0 : daysAtStart - 1;
 
-  const startDays = [...new Array(diff1).keys()].map(i =>
-    daysAtStart > 0 ? i + 1 - daysAtStart : -7 - daysAtStart + i + 1
+  const diffEnd = daysAtEnd === 0 ? 0 : 7 - daysAtEnd;
+
+  const startDays = [...new Array(diffStart).keys()].map(i =>
+    daysAtStart === 0 ? i - 5 : i - daysAtStart + 2
   );
-  const endDays = [...new Array(diff).keys()].map(i => i + 1);
+  const endDays = [...new Array(diffEnd).keys()].map(i => i + 1);
 
-  // console.log(month, { daysAtStart, daysAtEnd, startDays, endDays, diff1 });
   return [
     ...startDays.map(offset => new Date(year, startMonth, offset)).map(fn),
     ...month,
