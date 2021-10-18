@@ -30,17 +30,21 @@ export const App: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState<number>(date.getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(date.getMonth() + 1);
   const [selectedkey, setSelectedKey] = useState<string>('evening');
+  const [selectedDate, setSelectedDate] = useState<Date>();
+
   const [calendar, setCalendar] = useState<CalendarObj>({});
 
   useEffect(() => {
     if (selectedYear) {
-      sdfsd();
       setCalendar(buildCalendar(selectedYear, 11, mapDate));
     }
   }, [selectedYear]);
 
   const getClass = (currMonth: number, date: DateFormatted) =>
-    `${styles.app} ${currMonth === date.month ? '' : styles.fade}`;
+    `${styles.app} ${currMonth === date.month ? '' : styles.fade} ` +
+    `${
+      date.dateString === selectedDate?.toDateString() ? styles.selected : ''
+    }`;
 
   const renderBody = () => (
     <div>
@@ -73,7 +77,11 @@ export const App: React.FC = () => {
       .map(([key, d]) => (
         <div className={styles.app} key={key}>
           {d.map(f => (
-            <div key={f.toString} className={getClass(+key, f)}>
+            <div
+              key={f.toString}
+              className={getClass(+key, f)}
+              onClick={() => setSelectedDate(f.date)}
+            >
               {/* {f.dateString} */}
               {dayjs.default(f.date).format('DD')}
             </div>
@@ -82,7 +90,11 @@ export const App: React.FC = () => {
         </div>
       ));
 
-  const timesToSelect = sdfsd(selectedYear, selectedMonth, 12);
+  const timesToSelect = sdfsd(
+    selectedDate?.getFullYear(),
+    selectedDate?.getMonth(),
+    selectedDate?.getDate()
+  );
 
   const s = Object.entries(calendar).filter(([key]) => +key === selectedMonth);
 
@@ -96,29 +108,35 @@ export const App: React.FC = () => {
       </div>
       {renderCal()}
 
-      <div className={styles.times}>
-        <div className={styles.timesNav}>
-          {Object.keys(timesToSelect).map(key => (
-            <div
-              key={key}
-              className={key === selectedkey ? styles.high : ''}
-              onClick={() => setSelectedKey(key)}
-            >
-              {key}
-            </div>
-          ))}
+      <p>idea: handle ctrl to select multiple days</p>
+
+      {selectedDate && (
+        <div className={styles.times}>
+          <div className={styles.timesNav}>
+            {Object.keys(timesToSelect).map(key => (
+              <div
+                key={key}
+                className={key === selectedkey ? styles.high : ''}
+                onClick={() => setSelectedKey(key)}
+              >
+                {key}
+              </div>
+            ))}
+          </div>
+          <b>{selectedDate.toDateString()}</b>
+          <div>Select availble times to start the [minute] conference</div>
+          <div className={styles.timesList}>
+            {Object.entries(timesToSelect).map(([key, val]) =>
+              val
+                .filter(() => key === selectedkey)
+                .map(v => (
+                  <div key={v.toString()}>{dayjs.default(v).format('LTS')}</div>
+                ))
+            )}
+          </div>
         </div>
-        <div>Select availble times to start the [minute] conference</div>
-        <div className={styles.timesList}>
-          {Object.entries(timesToSelect).map(([key, val]) =>
-            val
-              .filter(() => key === selectedkey)
-              .map(v => (
-                <div key={v.toString()}>{dayjs.default(v).format('LTS')}</div>
-              ))
-          )}
-        </div>
-      </div>
+      )}
+
       {/* <pre>{JSON.stringify(calendar, undefined, 2)}</pre> */}
       {/* <pre>{JSON.stringify(sdfsd(), undefined, 2)}</pre> */}
     </div>
