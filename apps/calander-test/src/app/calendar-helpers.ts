@@ -59,12 +59,12 @@ const daysIntoYear = (date: Date) =>
   60 /
   1000;
 
-export const buildCalander = (year = 2021, month = 11, fn: MapFn) => {
+export const buildCalendar = (year = 2021, month = 11, fn: MapFn) => {
   const theDate = new Date(year, month, 31);
 
   const daysInYear = daysIntoYear(theDate);
 
-  const calander = [...new Array(daysInYear).keys()]
+  const calendar = [...new Array(daysInYear).keys()]
     .map(i => i + 1)
     .map(dayOfYear => new Date(theDate.getFullYear(), 0, dayOfYear))
     .map(fn)
@@ -76,10 +76,10 @@ export const buildCalander = (year = 2021, month = 11, fn: MapFn) => {
       {} as Record<number, DateFormatted[]>
     );
 
-  Object.entries(calander).forEach(
+  Object.entries(calendar).forEach(
     ([month, monthArr]) =>
-      (calander[+month] = updateMonthDays(monthArr, theDate.getFullYear(), fn))
+      (calendar[+month] = updateMonthDays(monthArr, theDate.getFullYear(), fn))
   );
 
-  return calander;
+  return calendar;
 };

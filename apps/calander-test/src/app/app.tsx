@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import styles from './app.module.scss';
-import { buildCalander, DateFormatted, mapDate } from './calander-helpers';
+import { buildCalendar, DateFormatted, mapDate } from './calendar-helpers';
 
 const date = new Date();
 
 export const App: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState(date.getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(date.getMonth() + 1);
-  const [calander, setClander] = useState(
-    buildCalander(selectedYear, selectedMonth, mapDate)
+  const [calendar, setCalendar] = useState(
+    buildCalendar(selectedYear, selectedMonth, mapDate)
   );
 
   useEffect(() => {
-    setClander(buildCalander(selectedYear, 11, mapDate));
+    setCalendar(buildCalendar(selectedYear, 11, mapDate));
   }, [selectedYear]);
 
   const getClass = (currMonth: number, date: DateFormatted) =>
@@ -35,14 +35,14 @@ export const App: React.FC = () => {
           value={selectedMonth}
           onChange={e => setSelectedMonth(+e.currentTarget.value)}
         >
-          {Object.keys(calander).map(k => (
+          {Object.keys(calendar).map(k => (
             <option key={k} value={k}>
               {k}
             </option>
           ))}
         </select>
       </div>
-      {Object.entries(calander)
+      {Object.entries(calendar)
         .filter(([key]) => +key === selectedMonth)
         .map(([key, d]) => (
           <div className={styles.app} key={key}>
@@ -59,7 +59,7 @@ export const App: React.FC = () => {
         <input type="text" step="1800" />
         <input type="text" step="1800" />
       </div>
-      {/* <pre>{JSON.stringify(calander, undefined, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(calendar, undefined, 2)}</pre> */}
     </div>
   );
 };

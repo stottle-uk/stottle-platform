@@ -1,8 +1,8 @@
-import { buildCalander } from './calander-helpers';
+import { buildCalendar } from './calendar-helpers';
 
-describe('Calander', () => {
-  it('should build calander', () => {
-    const days = buildCalander(2021, 11, date => ({
+describe('Calendar', () => {
+  it('should build calendar', () => {
+    const days = buildCalendar(2021, 11, date => ({
       dayOfWeek: date.getDay(),
       month: date.getMonth() + 1,
       toString: date.toString()
