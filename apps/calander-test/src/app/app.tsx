@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react';
 import styles from './app.module.scss';
 import { buildCalander, DATSTUFF, mapDate } from './calander-helpers';
 
-// const calander = buildCalander(2021, 11, mapDate);
-
-export function App() {
-  // const days = 0;
+export const App: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  const [calander, setClander] = useState(buildCalander(2021, 11, mapDate));
-  // const [selected, setSelected] = useState('1');
+  const [calander, setClander] = useState(
+    buildCalander(selectedYear, selectedMonth, mapDate)
+  );
 
   useEffect(() => {
     setClander(buildCalander(selectedYear, 11, mapDate));
@@ -62,6 +60,6 @@ export function App() {
       {/* <pre>{JSON.stringify(days, undefined, 2)}</pre> */}
     </div>
   );
-}
+};
 
 export default App;
