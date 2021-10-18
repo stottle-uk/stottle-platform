@@ -73,3 +73,35 @@ export const buildCalendar = (year = 2021, month = 11, fn: MapFn) => {
 
   return calendar;
 };
+
+type stuff2 = {
+  hour: number;
+  minutes: number;
+};
+
+export const sdfsd = (year = 2021, month = 10, day = 12) => {
+  const sdfsd = [...new Array(48).keys()]
+    .reduce(
+      (prev, curr) => [
+        ...prev,
+        {
+          hour: Math.floor((30 * curr) / 60),
+          minutes: curr % 2 === 0 ? 0 : 30
+        }
+      ],
+      [] as stuff2[]
+    )
+    .map(d => new Date(year, month - 1, day, d.hour, d.minutes));
+
+  return {
+    morning: sdfsd.slice(16, 24),
+    afternoon: sdfsd.slice(24, 34),
+    evening: sdfsd.slice(34, 44)
+  };
+};
+
+function getStage(dat: stuff2) {
+  console.log(dat.hour % 8);
+
+  return 'dsfsd';
+}

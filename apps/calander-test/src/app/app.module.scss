@@ -20,3 +20,41 @@
     }
   }
 }
+
+.times {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.timesNav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+
+  div {
+    border: 1px solid #333;
+    height: 36px;
+    width: 122px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.high {
+  background-color: blue;
+}
+
+.timesList {
+  padding: 16px 0;
+
+  div {
+    padding: 4px 0;
+  }
+}
