@@ -1,4 +1,5 @@
 export type DateFormatted = {
+  date?: Date;
   dayOfWeek: number;
   day?: number;
   month: number;

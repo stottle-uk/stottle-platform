@@ -1,3 +1,5 @@
+import * as dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { useEffect, useState } from 'react';
 import styles from './app.module.scss';
 import {
@@ -8,7 +10,9 @@ import {
   sdfsd
 } from './calendar-helpers';
 
+dayjs.extend(localizedFormat);
 export const mapDate: MapFn = date => ({
+  date,
   dayOfWeek: date.getDay(),
   // day: date.getDate(),
   month: date.getMonth() + 1,
@@ -70,22 +74,31 @@ export const App: React.FC = () => {
         <div className={styles.app} key={key}>
           {d.map(f => (
             <div key={f.toString} className={getClass(+key, f)}>
-              {f.dateString}
+              {/* {f.dateString} */}
+              {dayjs.default(f.date).format('DD')}
             </div>
           ))}
           <hr />
         </div>
       ));
 
-  const sdfsdf = sdfsd(selectedYear, selectedMonth, 12);
+  const timesToSelect = sdfsd(selectedYear, selectedMonth, 12);
+
+  const s = Object.entries(calendar).filter(([key]) => +key === selectedMonth);
+
+  const t = s.length ? s[0][1][selectedMonth] : undefined;
+
   return (
     <div>
-      {renderBody()}
+      <div className={styles.title}>
+        {dayjs.default(t?.date).format('MMMM YYYY')}
+        {renderBody()}
+      </div>
       {renderCal()}
 
       <div className={styles.times}>
         <div className={styles.timesNav}>
-          {Object.entries(sdfsdf).map(([key, val]) => (
+          {Object.keys(timesToSelect).map(key => (
             <div
               key={key}
               className={key === selectedkey ? styles.high : ''}
@@ -95,11 +108,14 @@ export const App: React.FC = () => {
             </div>
           ))}
         </div>
+        <div>Select availble times to start the [minute] conference</div>
         <div className={styles.timesList}>
-          {Object.entries(sdfsdf).map(([key, val]) =>
+          {Object.entries(timesToSelect).map(([key, val]) =>
             val
               .filter(() => key === selectedkey)
-              .map(v => <div key={v.toString()}>{v.toTimeString()}</div>)
+              .map(v => (
+                <div key={v.toString()}>{dayjs.default(v).format('LTS')}</div>
+              ))
           )}
         </div>
       </div>

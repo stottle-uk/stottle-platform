@@ -1,7 +1,7 @@
 .app {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-  margin: 50px auto;
+  margin: 24px auto;
 
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -21,13 +21,23 @@
   }
 }
 
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+}
+
 .times {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  max-width: 500px;
   margin: 0 auto;
+
+  div {
+    margin: 8px 0;
+  }
 }
 
 .timesNav {
@@ -44,6 +54,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 }
 
@@ -52,9 +63,21 @@
 }
 
 .timesList {
-  padding: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
   div {
-    padding: 4px 0;
+    padding: 16px 0;
+    margin: 8px;
+    width: 126px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background: lightblue;
+    }
   }
 }

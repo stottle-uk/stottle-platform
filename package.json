@@ -31,6 +31,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.7",
     "jquery": "3.6.0",
     "observable-hooks": "^4.0.5",
     "react": "17.0.2",
