@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/apps/jitsi-meet-react",
+    "public": "dist/apps/calander-test",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
