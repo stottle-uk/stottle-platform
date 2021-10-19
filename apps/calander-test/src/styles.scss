@@ -1,12 +1,118 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 // Variables
 
 $brand-primary: #0071EC;
+$background-color:#FFF;
+
+// app.modules.scss
+
+.app {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 24px auto;
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  > div {
+    background-color: $background-color;
+    margin: 8px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid $brand-primary;
+    border-radius: 50%;
+
+
+    &.fade {
+      opacity: 0.5;
+      background-color: #ccc;
+    }
+
+    &.selected {
+      opacity: 0.5;
+      background-color: #111;
+      color: white;
+    }
+
+    &.selectedDay {
+      border: 2px solid blue;
+    }
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.times {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+
+  div {
+    margin: 8px 0;
+  }
+}
+
+.timesNav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+
+  div {
+    border: 1px solid #333;
+    height: 36px;
+    width: 122px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.high {
+  background-color: blue;
+}
+
+.timesList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  div {
+    padding: 16px 0;
+    margin: 8px;
+    width: 126px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background: lightblue;
+    }
+  }
+}
+
+.selectedTime {
+  background: blanchedalmond;
+
+  &:hover {
+    background: burlywood !important;
+  }
+}
+
+
 
 // Custom styles
 
-.app_app__1W4wW > div {
-    background-color: $brand-primary;
-}
