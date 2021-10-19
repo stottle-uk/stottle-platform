@@ -2,15 +2,41 @@
 
 // Variables
 
-$brand-primary: #0071EC;
-$background-color:#FFF;
+$primary-color:     #0071EC;
+$primary-400:       #1F8AFF;
+$primary-200:       #85BFFF;
+$primary-050:       #EBF4FF;
 
+$brand-secondary:   #03E0D5;
+$background-color:  #FFF;
+
+$grey-100:          #F7F8FA;
+$grey-500:          #D9DEE5;
+$grey-600:          #B4BECB;
+$grey-700:          #9DA6B2;
 // app.modules.scss
 
-.app {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  margin: 24px auto;
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  padding-top: .25rem;
+  select {
+    padding: .5rem .75rem;
+    margin: 0 .5rem;
+    border-color: $grey-500;
+    border-radius: .25rem;
+  }
+}
+
+
+// main calendar numbers
+.app {
+  margin: 24px auto;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 
@@ -22,32 +48,38 @@ $background-color:#FFF;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border: 2px solid $brand-primary;
+    border: 2px solid $grey-600;
     border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    font-size: 1.5rem;
 
 
     &.fade {
       opacity: 0.5;
-      background-color: #ccc;
+      background-color: $grey-500;
+      border-color: $grey-500;
     }
 
     &.selected {
-      opacity: 0.5;
-      background-color: #111;
+      background-color: $primary-color;
       color: white;
+      border-color: $primary-color;
     }
 
     &.selectedDay {
-      border: 2px solid blue;
+      border: 2px solid $primary-color;
+    }
+
+    &:hover {
+      background-color: $primary-050;
+      border-color: $primary-color;
+      color: $primary-color;
     }
   }
 }
 
-.title {
-  display: flex;
-  justify-content: center;
-  font-size: 24px;
-}
+
 
 .times {
   display: flex;
@@ -59,6 +91,7 @@ $background-color:#FFF;
 
   div {
     margin: 8px 0;
+    border-radius: 1rem;
   }
 }
 
@@ -70,18 +103,41 @@ $background-color:#FFF;
   text-transform: uppercase;
 
   div {
-    border: 1px solid #333;
+    border: 1px solid $grey-500;
     height: 36px;
-    width: 122px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border-radius: 0;
+    
+    &:first-of-type  {
+      border-radius: 1rem 0 0 1rem;
+      border-right: 0;
+    }
+
+    &:last-of-type  {
+      border-radius: 0 1rem 1rem 0;
+      border-left: 0; 
+    }
+
+    &:hover {
+      background-color: $primary-050;
+      border-color: $primary-color;
+      color: $primary-color;
+      border: 1px solid $primary-color;
+    }
+
   }
+
+
 }
 
 .high {
-  background-color: blue;
+  background-color: $primary-color;
+  color: $background-color;
+
 }
 
 .timesList {
@@ -92,24 +148,33 @@ $background-color:#FFF;
     padding: 16px 0;
     margin: 8px;
     width: 126px;
-    border: 1px solid #ccc;
+    border: 1px solid $grey-500;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    
 
     &:hover {
-      background: lightblue;
+      background: $primary-050;
+      color: $primary-color;
+      border-color: $primary-color;
     }
   }
 }
 
 .selectedTime {
-  background: blanchedalmond;
+  background: $primary-color;
+  color: $background-color;
 
   &:hover {
-    background: burlywood !important;
+    background: $primary-050;
+    color: $primary-color;
+    border-color: $primary-color;
   }
+   &:focus {
+    color: $primary-color;
+   }
 }
 
 
