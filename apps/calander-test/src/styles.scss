@@ -41,6 +41,8 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 
+  max-width: 768px;
+
   > div {
     background-color: $background-color;
     margin: 8px;
@@ -73,11 +75,8 @@ body {
       background-color: $primary-200;
       color: $background-color;
       position: relative;
-      // text-emphasis-style: dot;
-      // text-emphasis-position: under left;
-      // -webkit-text-emphasis-style: dot;
-      // -webkit-text-emphasis-position: under;
 
+// Active 'dot'
       &:after {
         content: '\00B7';
         font-size: 200%;
