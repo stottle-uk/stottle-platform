@@ -18,6 +18,7 @@ $grey-700:          #9DA6B2;
 
 body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: $grey-100;
 }
 
 .title {
@@ -69,6 +70,26 @@ body {
 
     &.selectedDay {
       border: 2px solid $primary-color;
+      background-color: $primary-200;
+      color: $background-color;
+      position: relative;
+      // text-emphasis-style: dot;
+      // text-emphasis-position: under left;
+      // -webkit-text-emphasis-style: dot;
+      // -webkit-text-emphasis-position: under;
+
+      &:after {
+        content: '\00B7';
+        font-size: 200%;
+        position: absolute;
+        bottom: -0.15em;        
+        left: 0em;
+
+        text-align: center;
+        width: 100%;
+        color: inherit;
+
+      }
     }
 
     &:hover {
