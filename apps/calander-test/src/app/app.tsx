@@ -1,7 +1,8 @@
 import * as dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { useEffect, useState } from 'react';
-import styles from './app.module.scss';
+// import styles from './app.module.scss';
+//
 import {
   buildCalendar,
   CalendarObj,
@@ -42,14 +43,12 @@ export const App: React.FC = () => {
   }, [selectedYear]);
 
   const getClass = (currMonth: number, date: DateFormatted) =>
-    `${styles.app} ${currMonth === date.month ? '' : styles.fade} ` +
-    `${
-      date.dateString === selectedDate?.toDateString() ? styles.selected : ''
-    } ` +
+    `app ${currMonth === date.month ? '' : 'fade'} ` +
+    `${date.dateString === selectedDate?.toDateString() ? 'selected' : ''} ` +
     `${
       date.date &&
       selectedDays.some(s => dayjs.default(s).isSame(date.date, 'day'))
-        ? styles.selectedDay
+        ? 'selectedDay'
         : ''
     }`;
 
@@ -82,7 +81,7 @@ export const App: React.FC = () => {
     Object.entries(calendar)
       .filter(([key]) => +key === selectedMonth)
       .map(([key, d]) => (
-        <div className={styles.app} key={key}>
+        <div className='app' key={key}>
           {d.map(f => (
             <div
               key={f.toString}
@@ -109,19 +108,19 @@ export const App: React.FC = () => {
 
   return (
     <div>
-      <div className={styles.title}>
+      <div className='title'>
         {dayjs.default(t?.date).format('MMMM YYYY')}
         {renderBody()}
       </div>
       {renderCal()}
 
       {selectedDate && (
-        <div className={styles.times}>
-          <div className={styles.timesNav}>
+        <div className="times">
+          <div className='timesNav'>
             {Object.keys(timesToSelect).map(key => (
               <div
                 key={key}
-                className={key === selectedkey ? styles.high : ''}
+                className={key === selectedkey ? 'high' : ''}
                 onClick={() => setSelectedKey(key)}
               >
                 {key}
@@ -130,7 +129,7 @@ export const App: React.FC = () => {
           </div>
           <b>{selectedDate.toDateString()}</b>
           <div>Select availble times to start the [minute] conference</div>
-          <div className={styles.timesList}>
+          <div className='timesList'>
             {Object.entries(timesToSelect).map(([key, val]) =>
               val
                 .filter(() => key === selectedkey)
@@ -139,7 +138,7 @@ export const App: React.FC = () => {
                     key={v.toString()}
                     className={
                       selectedDays.includes(v.toISOString())
-                        ? styles.selectedTime
+                        ? 'selectedTime'
                         : ''
                     }
                     onClick={() =>
