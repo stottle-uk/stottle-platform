@@ -26,45 +26,73 @@ body {
   margin: 0;
 }
 
+div#root {
+  margin: 1rem;
+}
+
+.calHeader {
+  background-color: $background-color;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  display: table-cell;
+  vertical-align: middle;
+  height: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   display: flex;
   justify-content: center;
-  font-size: 24px;
-  padding-top: 0.25rem;
-  select {
-    min-width: 8em;
-    background: no-repeat
-      url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjQuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEwMjQgMTAyNDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiNGRkZGRkY7fQoJLnN0MXtmaWxsOm5vbmU7c3Ryb2tlOiNGMkYyRjI7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fQoJLnN0MntmaWxsOiNCNEJFQ0I7fQo8L3N0eWxlPgo8cmVjdCBjbGFzcz0ic3QwIiB3aWR0aD0iMTIiIGhlaWdodD0iMTAyNCIvPgo8bGluZSBjbGFzcz0ic3QxIiB4MT0iLTYzLjgiIHkxPSIwLjIiIHgyPSItNjMuOCIgeTI9IjEwMjcuNyIvPgo8Zz4KCTxwb2x5Z29uIGNsYXNzPSJzdDIiIHBvaW50cz0iNDM2LDUwOS45IDM1Ny42LDQzMy4xIDM3Ni44LDQxMy45IDUxMS4yLDU0OC4zIDY0Ny4yLDQxMi4zIDY2Ni40LDQzMS41IDUxMS4yLDU4Ni43IDQ5Miw1NjcuNSAJIi8+CjwvZz4KPC9zdmc+Cg==');
-    background-position: right 5px top; /* Change the px value here to change the distance */
+  font-size: 2rem;
+  padding-top: 0.5rem;
+}
 
+.dateSectors {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  select {
+    background: no-repeat url('assets/img/select-carret.svg');
+    background-position: right 4px top;
     -moz-appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
     padding: 0.75rem 1rem;
     margin: 0 0.5rem;
-    border-color: $grey-500;
+    border: 0;
     border-radius: 0.25rem;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-
+    outline: 2px solid transparent;
+    font-size: 2rem;
+    min-width: 8rem;
+    &:nth-of-type(2) {
+      min-width: 10rem;
+      order: 1;
+    }
+    &:hover {
+      background: no-repeat url('assets/img/select-carret-active.svg');
+      background-position: right 4px top;
+    }
     &:focus {
       outline: 2px solid $primary-color;
-      opacity: .5;
+      opacity: 0.5;
       border: 0;
+      font-size: 2rem;
     }
   }
 }
 
+select::-ms-expand {
+  display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
+}
 // main calendar numbers
 .app {
   margin: 24px auto;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-
   max-width: 768px;
-
   > div {
     background-color: $background-color;
     margin: 8px;
@@ -207,5 +235,21 @@ body {
   }
   &:focus {
     color: $primary-color;
+  }
+}
+
+.timesListed {
+  padding: 1rem;
+}
+
+.addToCalendar {
+  // @extend .btn-primary;
+  padding:  1rem 1.5rem;
+  border-radius: 2rem;
+  border: 0;
+  background-color: $primary-color;
+  color: $background-color;
+  &:hover {
+    background-color: $primary-400;
   }
 }

@@ -55,22 +55,25 @@ export const App: React.FC = () => {
   const renderBody = () => (
     <div>
       <select
+        value={selectedMonth}
+        onChange={e => setSelectedMonth(+e.currentTarget.value)}
+      >
+        {Object.keys(calendar).map(k => (
+          <option key={k} value={k}>
+            {dayjs
+              .default(t?.date)
+              .month(+k - 1)
+              .format('MMMM')}
+          </option>
+        ))}
+      </select>
+      <select
         value={selectedYear}
         onChange={e => setSelectedYear(+e.currentTarget.value)}
       >
         {[...new Array(25).keys()].map(k => (
           <option key={k} value={2000 + k}>
             {2000 + k}
-          </option>
-        ))}
-      </select>
-      <select
-        value={selectedMonth}
-        onChange={e => setSelectedMonth(+e.currentTarget.value)}
-      >
-        {Object.keys(calendar).map(k => (
-          <option key={k} value={k}>
-            {k}
           </option>
         ))}
       </select>
@@ -81,7 +84,7 @@ export const App: React.FC = () => {
     Object.entries(calendar)
       .filter(([key]) => +key === selectedMonth)
       .map(([key, d]) => (
-        <div className='app' key={key}>
+        <div className="app" key={key}>
           {d.map(f => (
             <div
               key={f.toString}
@@ -107,16 +110,16 @@ export const App: React.FC = () => {
   const t = s.length ? s[0][1][selectedMonth] : undefined;
 
   return (
-    <div>
-      <div className='title'>
-        {dayjs.default(t?.date).format('MMMM YYYY')}
-        {renderBody()}
+    <div className="calBlock">
+      <div className="calHeader">
+        {/* <div className="title">{dayjs.default(t?.date).format('MMMM')}</div> */}
+        <div className="dateSectors">{renderBody()}</div>
       </div>
       {renderCal()}
 
       {selectedDate && (
         <div className="times">
-          <div className='timesNav'>
+          <div className="timesNav">
             {Object.keys(timesToSelect).map(key => (
               <div
                 key={key}
@@ -129,7 +132,7 @@ export const App: React.FC = () => {
           </div>
           <b>{selectedDate.toDateString()}</b>
           <div>Select availble times to start the [minute] conference</div>
-          <div className='timesList'>
+          <div className="timesList">
             {Object.entries(timesToSelect).map(([key, val]) =>
               val
                 .filter(() => key === selectedkey)
@@ -157,8 +160,12 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      <pre>{JSON.stringify(selectedDays, undefined, 2)}</pre>
+      {/* <pre>{JSON.stringify(selectedDays, undefined, 2)}</pre> */}
+      {selectedDays.map(s => (
+        <div className="timesListed">{s}</div>
+      ))}
       {/* <pre>{JSON.stringify(sdfsd(), undefined, 2)}</pre> */}
+      <button className="addToCalendar">Add to my Calendar</button>
       <p>idea: handle ctrl to select multiple days</p>
     </div>
   );
