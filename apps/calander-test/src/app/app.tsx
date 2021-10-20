@@ -165,6 +165,7 @@ export const App: React.FC = () => {
         <div className="timesListed">{s}</div>
       ))}
       {/* <pre>{JSON.stringify(sdfsd(), undefined, 2)}</pre> */}
+      <button className="addToCalendar">Send to Techspert</button>
       <button className="addToCalendar">Add to my Calendar</button>
       <p>idea: handle ctrl to select multiple days</p>
     </div>
