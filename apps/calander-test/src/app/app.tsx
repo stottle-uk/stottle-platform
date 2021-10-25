@@ -53,49 +53,56 @@ export const App: React.FC = () => {
     }`;
 
   const renderBody = () => (
-    <div>
-      <select
-        value={selectedMonth}
-        onChange={e => setSelectedMonth(+e.currentTarget.value)}
-      >
-        {Object.keys(calendar).map(k => (
-          <option key={k} value={k}>
-            {dayjs
-              .default(t?.date)
-              .month(+k - 1)
-              .format('MMMM')}
-          </option>
-        ))}
-      </select>
-      <select
-        value={selectedYear}
-        onChange={e => setSelectedYear(+e.currentTarget.value)}
-      >
-        {[...new Array(25).keys()].map(k => (
-          <option key={k} value={2000 + k}>
-            {2000 + k}
-          </option>
-        ))}
-      </select>
-    </div>
+    <>
+      <div className="col-sm-6">
+        <select
+          value={selectedMonth}
+          onChange={e => setSelectedMonth(+e.currentTarget.value)}
+        >
+          {Object.keys(calendar).map(k => (
+            <option key={k} value={k}>
+              {dayjs
+                .default(t?.date)
+                .month(+k - 1)
+                .format('MMMM')}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="col-sm-6">
+        <select
+          value={selectedYear}
+          onChange={e => setSelectedYear(+e.currentTarget.value)}
+        >
+          {[...new Array(25).keys()].map(k => (
+            <option key={k} value={2000 + k}>
+              {2000 + k}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
   );
 
   const renderCal = () =>
     Object.entries(calendar)
       .filter(([key]) => +key === selectedMonth)
       .map(([key, d]) => (
-        <div className="app" key={key}>
-          {d.map(f => (
-            <div
-              key={f.toString}
-              className={getClass(+key, f)}
-              onClick={() => setSelectedDate(f.date)}
-            >
-              {/* {f.dateString} */}
-              {dayjs.default(f.date).format('DD')}
+        <div className="row">
+          <div className="container">
+            <div className="app" key={key}>
+              {d.map(f => (
+                <div
+                  key={f.toString}
+                  className={getClass(+key, f)}
+                  onClick={() => setSelectedDate(f.date)}
+                >
+                  {/* {f.dateString} */}
+                  {dayjs.default(f.date).format('DD')}
+                </div>
+              ))}
             </div>
-          ))}
-          <hr />
+          </div>
         </div>
       ));
 
@@ -112,61 +119,93 @@ export const App: React.FC = () => {
   return (
     <div className="calBlock">
       <div className="calHeader">
-        {/* <div className="title">{dayjs.default(t?.date).format('MMMM')}</div> */}
-        <div className="dateSectors">{renderBody()}</div>
+        <div className="row dateSectors">{renderBody()}</div>
       </div>
       {renderCal()}
 
-      {selectedDate && (
-        <div className="times">
-          <div className="timesNav">
-            {Object.keys(timesToSelect).map(key => (
-              <div
-                key={key}
-                className={key === selectedkey ? 'high' : ''}
-                onClick={() => setSelectedKey(key)}
-              >
-                {key}
+      <a
+        className="btn btn-primary"
+        data-bs-toggle="offcanvas"
+        href="#offcanvasCalendar"
+        role="button"
+        aria-controls="offcanvasCalendar"
+      >
+        Open modal on date click
+      </a>
+      <div
+        className="offcanvas offcanvas-end"
+        data-bs-scroll="true"
+        id="offcanvasCalendar"
+      >
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasCalendarLabel">
+            My Availabilities
+          </h5>
+          <button
+            type="button"
+            className="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body">
+          <div>
+            {selectedDate && (
+              <div className="times">
+                <div className="timesNav">
+                  {Object.keys(timesToSelect).map(key => (
+                    <div
+                      key={key}
+                      className={key === selectedkey ? 'high' : ''}
+                      onClick={() => setSelectedKey(key)}
+                    >
+                      {key}
+                    </div>
+                  ))}
+                </div>
+                <h4>{selectedDate.toDateString()}</h4>
+                <div>
+                  Select availble times to start the [minute] conference
+                </div>
+                <div className="timesList">
+                  {Object.entries(timesToSelect).map(([key, val]) =>
+                    val
+                      .filter(() => key === selectedkey)
+                      .map(v => (
+                        <div
+                          key={v.toString()}
+                          className={
+                            selectedDays.includes(v.toISOString())
+                              ? 'selectedTime'
+                              : ''
+                          }
+                          onClick={() =>
+                            setSelectedDays(d =>
+                              d.includes(v.toISOString())
+                                ? d.filter(e => e !== v.toISOString())
+                                : [...d, v.toISOString()]
+                            )
+                          }
+                        >
+                          {dayjs.default(v).format('LT')}
+                        </div>
+                      ))
+                  )}
+                </div>
               </div>
-            ))}
-          </div>
-          <b>{selectedDate.toDateString()}</b>
-          <div>Select availble times to start the [minute] conference</div>
-          <div className="timesList">
-            {Object.entries(timesToSelect).map(([key, val]) =>
-              val
-                .filter(() => key === selectedkey)
-                .map(v => (
-                  <div
-                    key={v.toString()}
-                    className={
-                      selectedDays.includes(v.toISOString())
-                        ? 'selectedTime'
-                        : ''
-                    }
-                    onClick={() =>
-                      setSelectedDays(d =>
-                        d.includes(v.toISOString())
-                          ? d.filter(e => e !== v.toISOString())
-                          : [...d, v.toISOString()]
-                      )
-                    }
-                  >
-                    {dayjs.default(v).format('LTS')}
-                  </div>
-                ))
             )}
+
+            {selectedDays.map(s => (
+              <div className="col timesListed">{s}</div>
+            ))}
+            <div className="btn-group">
+              <button className="btn btn-primary">Send to Techspert</button>
+              <button className="btn addToCalendar">Add to my Calendar</button>
+            </div>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* <pre>{JSON.stringify(selectedDays, undefined, 2)}</pre> */}
-      {selectedDays.map(s => (
-        <div className="timesListed">{s}</div>
-      ))}
-      {/* <pre>{JSON.stringify(sdfsd(), undefined, 2)}</pre> */}
-      <button className="addToCalendar">Send to Techspert</button>
-      <button className="addToCalendar">Add to my Calendar</button>
       <p>idea: handle ctrl to select multiple days</p>
     </div>
   );
