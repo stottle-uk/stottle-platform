@@ -1,0 +1,33 @@
+/* VARIABLES*/
+/* if you use CSS just replace variables with values directly*/
+$glassWidth: auto;
+$glassHeight: auto;
+$glassColor: rgba(255, 255, 255, 0.2);
+$glassBorderRadius: 1em;
+$blurStrength: 5px;
+
+/* BACKGROUND */
+// html {
+//   background: url(https://cdn.pixabay.com/photo/2016/04/16/12/50/chrysanthemum-1332994_1280.jpg)
+//     no-repeat center center fixed;
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+// }
+
+/* GLASSMORPHISM*/
+.glass {
+  width: $glassWidth;
+  height: $glassHeight;
+  background: $glassColor;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur($blurStrength);
+  -webkit-backdrop-filter: blur($blurStrength);
+  border-radius: $glassBorderRadius;
+  /* align glass vertically center (optional)*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,246 @@
+// @include media-breakpoint-up (xs) {}
+// @include media-breakpoint-up (sm) {font-size: 4rem;}
+// @include media-breakpoint-up (md) {font-size: 5rem;}
+// @include media-breakpoint-up (lg) {font-size: 6rem;}
+// @include media-breakpoint-up (xl) {font-size: 6rem;}
+
+.calHeader {
+  background-color: $background-color;
+  width: 100%;
+  border-radius: 2rem 2rem 0 0;
+  display: flex;
+  justify-content: center;
+  display: table-cell;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  padding-top: 0.5rem;
+}
+
+.dateSectors {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  select {
+    background: no-repeat url('assets/txp-theme/img/select-carret.svg');
+    background-position: right 4px top;
+    -moz-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 0.75rem 1rem;
+    border: 0;
+    border-radius: 0.25rem;
+    outline: 2px solid transparent;
+    font-size: 2rem;
+    width: 100%;
+    min-width: 16rem;
+
+    @include media-breakpoint-up(xs) {
+    }
+    @include media-breakpoint-up(sm) {
+    }
+    @include media-breakpoint-up(md) {
+    }
+
+    &:nth-of-type(2) {
+      min-width: 11rem;
+    }
+    &:hover {
+      background: no-repeat url('assets/txp-theme/img/select-carret-active.svg');
+      background-position: right 4px top;
+    }
+    &:focus {
+      outline: 2px solid $primary-color;
+      opacity: 0.5;
+      border: 0;
+      font-size: 2rem;
+    }
+  }
+}
+
+select::-ms-expand {
+  display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
+}
+
+// div {
+//   border: 1px solid red;
+// }
+// main calendar numbers
+.app {
+  margin: 24px auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  max-width: 768px;
+  > div {
+    background-color: $background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid $grey-600;
+    border-radius: 50%;
+
+    width: 3vw;
+    height: 3vw;
+
+    @include media-breakpoint-down(xs) {
+      margin: 0.5vw;
+      padding: 2.5vh;
+    }
+    @include media-breakpoint-up(sm) {
+      margin: 0.75vw;
+      padding: 3vh;
+    }
+    @include media-breakpoint-up(md) {
+      margin: 1vw;
+      padding: 4vh;
+      font-size: 3vw;
+    } // padding: 16px;
+    @include media-breakpoint-up(lg) {
+      font-size: 2.33vw;
+    }
+
+    &.fade {
+      opacity: 0.5;
+      background-color: $grey-500;
+      border-color: $grey-500;
+    }
+
+    &.selected {
+      background-color: $primary-color;
+      color: white;
+      border-color: $primary-color;
+    }
+
+    &.selectedDay {
+      border: 2px solid $primary-color;
+      background-color: $primary-200;
+      color: $background-color;
+      position: relative;
+
+      // Active 'dot'
+      &:after {
+        content: '\00B7';
+        font-size: 200%;
+        position: absolute;
+        bottom: -0.4em;
+        left: 0em;
+
+        text-align: center;
+        width: 100%;
+        color: inherit;
+      }
+    }
+
+    &:hover {
+      background-color: $primary-050;
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+  }
+}
+
+.times {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+
+  div {
+    margin: 8px 0;
+    border-radius: 1rem;
+  }
+}
+
+.timesNav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+
+  div {
+    border: 1px solid $grey-500;
+    height: 36px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 0;
+
+    &:first-of-type {
+      border-radius: 1rem 0 0 1rem;
+      border-right: 0;
+    }
+
+    &:last-of-type {
+      border-radius: 0 1rem 1rem 0;
+      border-left: 0;
+    }
+
+    &:hover {
+      background-color: $primary-050;
+      border-color: $primary-color;
+      color: $primary-color;
+      border: 1px solid $primary-color;
+    }
+  }
+}
+
+.high {
+  background-color: $primary-color;
+  color: $background-color;
+}
+
+.timesList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  div {
+    padding: 16px 0;
+    margin: 8px;
+    width: 126px;
+    border: 1px solid $grey-500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background: $primary-050;
+      color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.selectedTime {
+  background: $primary-color;
+  color: $background-color;
+
+  &:hover {
+    background: $primary-050;
+    color: $primary-color;
+    border-color: $primary-color;
+  }
+  &:focus {
+    color: $primary-color;
+  }
+}
+
+.timesListed {
+  padding: 0.5rem 1rem;
+}
+
+.addToCalendar {
+  @extend .btn-outline-primary;
+}
