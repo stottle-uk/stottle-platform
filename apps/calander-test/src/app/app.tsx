@@ -1,8 +1,9 @@
 import * as dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
-import { useEffect, useState } from 'react';
+import { default as React, useEffect, useState } from 'react';
+//import { ReactComponent as IconBefore } from '../assets/bootstrap-icons/check-circle.svg';
+import logo from '../assets/bootstrap-icons/calendar-check-fill.svg';
 // import styles from './app.module.scss';
-//
 import {
   buildCalendar,
   CalendarObj,
@@ -10,6 +11,10 @@ import {
   MapFn,
   sdfsd
 } from './calendar-helpers';
+
+const Header = () => <img src={logo} alt="Logo" />;
+
+export { Header };
 
 dayjs.extend(localizedFormat);
 export const mapDate: MapFn = date => ({
@@ -137,9 +142,12 @@ export const App: React.FC = () => {
         data-bs-scroll="true"
         id="offcanvasCalendar"
       >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasCalendarLabel">
-            My Availabilities
+        <div className="offcanvas-header text-center">
+          <h5
+            className="offcanvas-title text-center"
+            id="offcanvasCalendarLabel"
+          >
+            Choose your availabilities
           </h5>
           <button
             type="button"
@@ -196,11 +204,26 @@ export const App: React.FC = () => {
             )}
 
             {selectedDays.map(s => (
-              <div className="col timesListed">{s}</div>
+              <div className="timesListed row">
+                <div className="col-1">
+                  <img
+                    className="success"
+                    src="assets/bootstrap-icons/check-circle.svg"
+                    alt="Date selected"
+                    width="24"
+                    height="24"
+                  />
+                </div>{' '}
+                <div className="col flex-grow-1">
+                  {dayjs.default(s).format('LLL')}
+                </div>
+                <div className="col-3">
+                  <button className="btn addToCalendar float-end">+</button>
+                </div>
+              </div>
             ))}
-            <div className="btn-group">
-              <button className="btn btn-primary">Send to Techspert</button>
-              <button className="btn addToCalendar">Add to my Calendar</button>
+            <div className="d-grid gap-2 mt-3">
+              <button className="btn btn-primary">Submit availabilities</button>
             </div>
           </div>
         </div>

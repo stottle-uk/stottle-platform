@@ -1,8 +1,8 @@
 // @include media-breakpoint-up (xs) {}
-// @include media-breakpoint-up (sm) {font-size: 4rem;}
-// @include media-breakpoint-up (md) {font-size: 5rem;}
-// @include media-breakpoint-up (lg) {font-size: 6rem;}
-// @include media-breakpoint-up (xl) {font-size: 6rem;}
+// @include media-breakpoint-up (sm) {}
+// @include media-breakpoint-up (md) {}
+// @include media-breakpoint-up (lg) {}
+// @include media-breakpoint-up (xl) {}
 
 .calHeader {
   background-color: $background-color;
@@ -13,6 +13,8 @@
   display: table-cell;
   display: flex;
   flex-direction: column;
+  max-width: 768px;
+  margin: 0 auto;
 }
 
 .title {
@@ -103,7 +105,10 @@ select::-ms-expand {
       font-size: 3vw;
     } // padding: 16px;
     @include media-breakpoint-up(lg) {
-      font-size: 2.33vw;
+      font-size: 3vw;
+    }
+    @include media-breakpoint-up(xl) {
+      font-size: 1.8vw;
     }
 
     &.fade {
@@ -128,13 +133,25 @@ select::-ms-expand {
       &:after {
         content: '\00B7';
         font-size: 200%;
-        position: absolute;
-        bottom: -0.4em;
-        left: 0em;
-
         text-align: center;
         width: 100%;
         color: inherit;
+        position: absolute;
+
+        left: 0em;
+        @include media-breakpoint-up(xs) {
+          bottom: -0.5em;
+        }
+        @include media-breakpoint-up(sm) {
+          bottom: -0.3em;
+        }
+        @include media-breakpoint-up(md) {
+        }
+        @include media-breakpoint-up(lg) {
+        }
+        @include media-breakpoint-up(xl) {
+          bottom: -0.5em;
+        }
       }
     }
 
@@ -151,11 +168,11 @@ select::-ms-expand {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 500px;
+  //max-width: 500px;
   margin: 0 auto;
 
   div {
-    margin: 8px 0;
+    margin: 0 0 1rem;
     border-radius: 1rem;
   }
 }
@@ -199,16 +216,19 @@ select::-ms-expand {
 .high {
   background-color: $primary-color;
   color: $background-color;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
 }
 
 .timesList {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-
+  grid-template-columns: repeat(2, 45.5% [col-start]);
+  column-gap: 1rem;
+  width: 100%;
   div {
     padding: 16px 0;
     margin: 8px;
-    width: 126px;
+    width: 100%;
     border: 1px solid $grey-500;
     display: flex;
     justify-content: center;
@@ -238,9 +258,28 @@ select::-ms-expand {
 }
 
 .timesListed {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $grey-200;
+
+  &::before {
+    color: $success;
+  }
+
+  &::before {
+    display: inline-block;
+    content: '';
+    vertical-align: -0.125em;
+    background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
 }
 
+// .timesListed::after {
+//   background: url('assets/bootstrap-icons/calendar-date.svg');
+//   background-size: 1rem 1rem;
+//   background-position: 50% 50%;
+// }
 .addToCalendar {
   @extend .btn-outline-primary;
 }
