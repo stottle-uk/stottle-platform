@@ -1,20 +1,8 @@
-// @include media-breakpoint-up (xs) {}
-// @include media-breakpoint-up (sm) {}
-// @include media-breakpoint-up (md) {}
-// @include media-breakpoint-up (lg) {}
-// @include media-breakpoint-up (xl) {}
-
 .calHeader {
-  background-color: $background-color;
-  width: 100%;
-  border-radius: 2rem 2rem 0 0;
-  display: flex;
-  justify-content: center;
-  display: table-cell;
-  display: flex;
-  flex-direction: column;
   max-width: 768px;
-  margin: 0 auto;
+  border-radius: 2rem 2rem 0 0;
+  margin: 2rem auto 0;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .title {
@@ -27,41 +15,46 @@
 .dateSectors {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
   select {
-    background: no-repeat url('assets/txp-theme/img/select-carret.svg');
-    background-position: right 4px top;
+    background: url('assets/txp-theme/img/select-carret.svg') no-repeat
+      transparent;
+    background-position: right 0px top;
     -moz-appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    padding: 0.75rem 1rem;
+    padding: 1rem 5rem 1rem 2rem;
     border: 0;
     border-radius: 0.25rem;
     outline: 2px solid transparent;
     font-size: 2rem;
     width: 100%;
-    min-width: 16rem;
+    border-radius: 2rem;
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 9%);
+    @extend .glass !optional;
 
     @include media-breakpoint-up(xs) {
+      font-size: 1rem;
     }
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-down(sm) {
+      border: 1px solid $grey-200;
+      margin-bottom: 0.5rem;
     }
     @include media-breakpoint-up(md) {
     }
-
+    @include media-breakpoint-up(md) {
+    }
     &:nth-of-type(2) {
       min-width: 11rem;
     }
     &:hover {
       background: no-repeat url('assets/txp-theme/img/select-carret-active.svg');
-      background-position: right 4px top;
+      background-position: right 0px top;
+      opacity: 1;
     }
     &:focus {
-      outline: 2px solid $primary-color;
-      opacity: 0.5;
       border: 0;
-      font-size: 2rem;
+      color: $primary-color;
     }
   }
 }
@@ -70,27 +63,34 @@ select::-ms-expand {
   display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
 }
 
-// div {
-//   border: 1px solid red;
-// }
 // main calendar numbers
 .app {
-  margin: 24px auto;
+  margin: 2rem auto; // too opinionated?
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   max-width: 768px;
+  background-color: rgba($color: $background-color, $alpha: 0.3);
+  border-radius: 0 0 2rem 2rem;
+
   > div {
-    background-color: $background-color;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border: 2px solid $grey-600;
     border-radius: 50%;
-
     width: 3vw;
     height: 3vw;
+    background: rgb(247, 248, 250);
+    background: linear-gradient(
+      45deg,
+      rgba(247, 248, 250, 1) 0%,
+      rgba(251, 252, 252, 1) 50%
+    );
 
+    color: $grey-900;
+    border: 3px solid rgba($color: $background-color, $alpha: 0.3);
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 9%);
+    @extend .glass !optional;
     @include media-breakpoint-down(xs) {
       margin: 0.5vw;
       padding: 2.5vh;
@@ -103,30 +103,31 @@ select::-ms-expand {
       margin: 1vw;
       padding: 4vh;
       font-size: 3vw;
-    } // padding: 16px;
+    }
     @include media-breakpoint-up(lg) {
       font-size: 3vw;
     }
     @include media-breakpoint-up(xl) {
       font-size: 1.8vw;
+      margin: 0.5vw;
     }
 
     &.fade {
       opacity: 0.5;
-      background-color: $grey-500;
-      border-color: $grey-500;
+      background-color: rgba($color: #0071ec, $alpha: 0.25);
+      // border-color: $grey-500;
     }
 
     &.selected {
       background-color: $primary-color;
-      color: white;
+      color: $primary-color;
       border-color: $primary-color;
     }
 
     &.selectedDay {
       border: 2px solid $primary-color;
       background-color: $primary-200;
-      color: $background-color;
+      color: $primary-color;
       position: relative;
 
       // Active 'dot'
@@ -135,7 +136,7 @@ select::-ms-expand {
         font-size: 200%;
         text-align: center;
         width: 100%;
-        color: inherit;
+        color: $primary-color;
         position: absolute;
 
         left: 0em;
@@ -168,22 +169,21 @@ select::-ms-expand {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //max-width: 500px;
   margin: 0 auto;
 
   div {
-    margin: 0 0 1rem;
+    margin: 0 0 0.5rem;
     border-radius: 1rem;
   }
 }
 
 .timesNav {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-transform: uppercase;
+  width: 100%;
 
+  @extend h6;
   div {
     border: 1px solid $grey-500;
     height: 36px;
@@ -213,21 +213,18 @@ select::-ms-expand {
   }
 }
 
-.high {
+.activePeriod {
   background-color: $primary-color;
   color: $background-color;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
 }
 
 .timesList {
   display: grid;
-  grid-template-columns: repeat(2, 45.5% [col-start]);
-  column-gap: 1rem;
+  grid-template-columns: repeat(2, 50% [col-start]);
+  column-gap: 0.5rem;
   width: 100%;
   div {
     padding: 16px 0;
-    margin: 8px;
     width: 100%;
     border: 1px solid $grey-500;
     display: flex;
@@ -262,24 +259,16 @@ select::-ms-expand {
   border-bottom: 1px solid $grey-200;
 
   &::before {
-    color: $success;
-  }
-
-  &::before {
     display: inline-block;
     content: '';
     vertical-align: -0.125em;
     background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>");
     background-repeat: no-repeat;
     background-size: 1rem 1rem;
+    color: $success;
   }
 }
 
-// .timesListed::after {
-//   background: url('assets/bootstrap-icons/calendar-date.svg');
-//   background-size: 1rem 1rem;
-//   background-position: 50% 50%;
-// }
 .addToCalendar {
   @extend .btn-outline-primary;
 }

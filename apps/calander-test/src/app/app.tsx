@@ -122,7 +122,7 @@ export const App: React.FC = () => {
   const t = s.length ? s[0][1][selectedMonth] : undefined;
 
   return (
-    <div className="calBlock">
+    <div className="calendarApp">
       <div className="calHeader">
         <div className="row dateSectors">{renderBody()}</div>
       </div>
@@ -131,6 +131,8 @@ export const App: React.FC = () => {
       <a
         className="btn btn-primary"
         data-bs-toggle="offcanvas"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
         href="#offcanvasCalendar"
         role="button"
         aria-controls="offcanvasCalendar"
@@ -156,25 +158,25 @@ export const App: React.FC = () => {
             aria-label="Close"
           ></button>
         </div>
-        <div className="offcanvas-body">
-          <div>
-            {selectedDate && (
-              <div className="times">
-                <div className="timesNav">
-                  {Object.keys(timesToSelect).map(key => (
-                    <div
-                      key={key}
-                      className={key === selectedkey ? 'high' : ''}
-                      onClick={() => setSelectedKey(key)}
-                    >
-                      {key}
-                    </div>
-                  ))}
-                </div>
-                <h4>{selectedDate.toDateString()}</h4>
-                <div>
-                  Select availble times to start the [minute] conference
-                </div>
+        <div className="offcanvas-body pt-0">
+          {selectedDate && (
+            <div className="times">
+              <div className="timesNav">
+                {Object.keys(timesToSelect).map(key => (
+                  <div
+                    key={key}
+                    className={key === selectedkey ? 'activePeriod' : ''}
+                    onClick={() => setSelectedKey(key)}
+                  >
+                    {key}
+                  </div>
+                ))}
+              </div>
+              <h4>{selectedDate.toDateString()}</h4>
+              <div className="calInstructions">
+                Select your available timeslots to start the [minute] conference
+              </div>
+              <div className="container p-0">
                 <div className="timesList">
                   {Object.entries(timesToSelect).map(([key, val]) =>
                     val
@@ -201,35 +203,36 @@ export const App: React.FC = () => {
                   )}
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {selectedDays.map(s => (
+          {selectedDays.map(s => (
+            <div className="container">
               <div className="timesListed row">
                 <div className="col-1">
-                  <img
-                    className="success"
-                    src="assets/bootstrap-icons/check-circle.svg"
-                    alt="Date selected"
-                    width="24"
-                    height="24"
-                  />
+                  <i className="bi bi-check-circle text-success"></i>
                 </div>{' '}
                 <div className="col flex-grow-1">
                   {dayjs.default(s).format('LLL')}
                 </div>
-                <div className="col-3">
-                  <button className="btn addToCalendar float-end">+</button>
+                <div className="col-1">
+                  <i className="bi bi-cloud-download primary"></i>
+                </div>
+                <div className="col-1">
+                  <i className="bi bi-x-circle link-danger"></i>
                 </div>
               </div>
-            ))}
-            <div className="d-grid gap-2 mt-3">
-              <button className="btn btn-primary">Submit availabilities</button>
             </div>
+          ))}
+          <div className="emptyCalState alert alert-dark d-none">
+            Please select a date on the calendar to choose your available
+            timeslots
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button className="btn btn-primary">Submit availabilities</button>
           </div>
         </div>
       </div>
-
-      <p>idea: handle ctrl to select multiple days</p>
     </div>
   );
 };

@@ -1,0 +1,6 @@
+.offcanvas-end {
+  @include media-breakpoint-down(sm) {
+    border-left: 0;
+    width: 100%;
+  }
+}
