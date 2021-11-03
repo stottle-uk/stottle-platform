@@ -6,3 +6,18 @@
   padding: 1rem;
   background-color: $primary-color;
 }
+
+.navbar-brand {
+  width: 41px;
+  height: 41px;
+  @include media-breakpoint-down(sm) {
+    background: url(/assets/txp-theme/img/techspert-icon-wo.svg) no-repeat 0px
+      0px;
+  }
+  @include media-breakpoint-up(sm) {
+    background: url(/assets/txp-theme/img/techspert-logo-wo.svg) no-repeat 0px
+      0px;
+    width: 242px;
+    height: 65px;
+  }
+}
