@@ -2,7 +2,7 @@ import * as dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { default as React, useEffect, useState } from 'react';
 //import { ReactComponent as IconBefore } from '../assets/bootstrap-icons/check-circle.svg';
-import logo from '../assets/bootstrap-icons/calendar-check-fill.svg';
+// import logo from 'assets/txp-theme/img/techspert-logo-wo.svg';
 // import styles from './app.module.scss';
 import {
   buildCalendar,
@@ -12,7 +12,7 @@ import {
   sdfsd
 } from './calendar-helpers';
 
-const Header = () => <img src={logo} alt="Logo" />;
+const Header = () => <img src="{logo}" alt="Logo" />;
 
 export { Header };
 
