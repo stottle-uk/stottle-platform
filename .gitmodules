@@ -1,3 +1,6 @@
 [submodule "apps/calander-test/src/theme/bootstrap"]
 	path = apps/calander-test/src/theme/bootstrap
 	url = https://github.com/twbs/bootstrap.git
+[submodule "apps/calander-test/src/assets"]
+	path = apps/calander-test/src/assets
+	url = git@github.com:techspert-io/sass.git
