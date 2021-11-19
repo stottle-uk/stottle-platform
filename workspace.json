@@ -1,6 +1,82 @@
 {
   "version": 2,
   "projects": {
+    "calander-test": {
+      "root": "apps/calander-test",
+      "sourceRoot": "apps/calander-test/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/calander-test",
+            "index": "apps/calander-test/src/index.html",
+            "main": "apps/calander-test/src/main.tsx",
+            "polyfills": "apps/calander-test/src/polyfills.ts",
+            "tsConfig": "apps/calander-test/tsconfig.app.json",
+            "assets": [
+              "apps/calander-test/src/favicon.ico",
+              "apps/calander-test/src/assets"
+            ],
+            "styles": ["apps/calander-test/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/calander-test/src/environments/environment.ts",
+                  "with": "apps/calander-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "calander-test:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "calander-test:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/calander-test/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/calander-test"],
+          "options": {
+            "jestConfig": "apps/calander-test/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "jitsi-meet-react": {
       "root": "apps/jitsi-meet-react",
       "sourceRoot": "apps/jitsi-meet-react/src",
