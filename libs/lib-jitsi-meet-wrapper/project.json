@@ -1,0 +1,33 @@
+{
+  "root": "libs/lib-jitsi-meet-wrapper",
+  "sourceRoot": "libs/lib-jitsi-meet-wrapper/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/lib-jitsi-meet-wrapper/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/lib-jitsi-meet-wrapper"],
+      "options": {
+        "jestConfig": "libs/lib-jitsi-meet-wrapper/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/lib-jitsi-meet-wrapper",
+        "tsConfig": "libs/lib-jitsi-meet-wrapper/tsconfig.lib.json",
+        "packageJson": "libs/lib-jitsi-meet-wrapper/package.json",
+        "main": "libs/lib-jitsi-meet-wrapper/src/index.ts",
+        "assets": ["libs/lib-jitsi-meet-wrapper/*.md"]
+      }
+    }
+  }
+}
