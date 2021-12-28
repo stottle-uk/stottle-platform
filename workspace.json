@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "jitsi-meet-react": "apps/jitsi-meet-react",
-    "lib-jitsi-meet-wrapper": "libs/lib-jitsi-meet-wrapper"
+    "lib-jitsi-meet-wrapper": "libs/lib-jitsi-meet-wrapper",
+    "stottle-web": "apps/stottle-web",
+    "stottle-web-node": "apps/stottle-web-node"
   }
 }
