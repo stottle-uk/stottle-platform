@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/apps/stottle-web/public",
+    "public": "dist/apps/stottle-web-node",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
