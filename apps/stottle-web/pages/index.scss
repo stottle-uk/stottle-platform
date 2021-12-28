@@ -1,0 +1,69 @@
+@import 'include-media/dist/_include-media.scss';
+
+$breakpoints: (
+  phone: 20em,
+  tablet: 48em,
+  desktop: 64em,
+);
+
+$color1: #272b2c;
+$color2: #5d544d;
+$color3: #6d747b;
+$color4: #98aaae;
+$color5: #dbd3c0;
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-bottom: 24px;
+
+  h1 {
+    font-size: 48px;
+    line-height: 62px;
+    color: $color1;
+  }
+
+  h2 {
+    font-size: 32px;
+    line-height: 48px;
+    color: $color3;
+  }
+
+  h3 {
+    color: $color1;
+    font-size: 24px;
+    line-height: 64px;
+  }
+
+  @include media('>tablet') {
+    h1 {
+      font-size: 96px;
+      line-height: 124px;
+    }
+
+    h2 {
+      font-size: 48px;
+      line-height: 62px;
+    }
+  }
+
+  .header {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    @include media('>tablet') {
+      flex: 1;
+    }
+  }
+
+  .content {
+    width: 100%;
+    flex: 1;
+  }
+}

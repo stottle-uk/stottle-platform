@@ -1,0 +1,47 @@
+@import 'include-media/dist/_include-media.scss';
+
+.content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+
+  @include media('>tablet') {
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+  }
+}
+
+.contentItem {
+  display: block;
+  text-decoration: none;
+
+  transform: translateY(0);
+  transition: transform 0.3s, opacity 1s;
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-16px);
+  }
+}
+
+.contentItemHeader {
+  text-align: center;
+}
+
+.contentItemBody {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+
+  @include media('>tablet') {
+    width: 200px;
+    height: 200px;
+  }
+
+  > img {
+    height: 100%;
+    width: 100%;
+    display: block;
+    object-fit: contain;
+  }
+}
