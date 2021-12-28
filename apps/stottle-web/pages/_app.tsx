@@ -28,6 +28,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
           name="description"
           content="Stuart Tottle - Software Engineer based in the UK"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className="app">
         <Component {...pageProps} />
