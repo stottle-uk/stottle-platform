@@ -21,7 +21,8 @@ const ContentItem: React.FC<OwnProps> = ({ item }) => (
   >
     <h3 className={styles.contentItemHeader}>{item.title}</h3>
     <div className={styles.contentItemBody}>
-      <Image src={item.logo} alt={item.title} height="200px" width="200px" />
+      <Image src={item.logo} alt={item.title}></Image>
+      {/* <img src={item.logo} alt={item.title} /> */}
     </div>
   </a>
 );
