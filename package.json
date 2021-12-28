@@ -33,6 +33,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@nrwl/next": "^13.4.1",
     "core-js": "^3.6.5",
+    "firebase": "^9.6.1",
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.16.0",
     "include-media": "^1.4.10",
