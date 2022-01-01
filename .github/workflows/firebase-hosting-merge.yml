@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build Server
-        run: npx nx run stottle-web-node:build
+        run: npx nx run stottle-web-node:build:production
       - name: Build App
         run: npx nx run stottle-web:build
       - name: Install firebase
