@@ -10,7 +10,7 @@
     ]
   },
   "functions": {
-    "source": ".",
+    "source": "dist/apps/stottle-web-node",
     "runtime": "nodejs14"
   },
   "emulators": {
