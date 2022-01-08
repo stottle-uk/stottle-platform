@@ -1,11 +1,12 @@
 import { merge, Subject } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
   JitsiConferenceEvents,
   JitsiConferenceEventTypes
 } from '../models/events/conference';
 import { JitsiConnectionEventTypes } from '../models/events/connection';
+import { AudioMixerEffect } from './effects/audioMixerEffect';
 import { JitsiMeetService } from './jitsiMeetService';
 import {
   AddTrack,
@@ -35,6 +36,27 @@ export class JitsiTracksStateService {
 
   init() {
     return merge(this.createLocalTracks$, this.events$, this.state$);
+  }
+
+  shareAudio() {
+    this.jitsiService
+      .createLocalTracks({
+        devices: ['desktop']
+      })
+      .pipe(
+        filter(track => track.getType() === 'audio'),
+        withLatestFrom(this.state$),
+        tap(([track, tracksState]) => {
+          const localAudioTrack = tracksState.localTracks.find(
+            t => t.getType() === 'audio'
+          );
+
+          if (localAudioTrack) {
+            track.setEffect(new AudioMixerEffect(localAudioTrack));
+          }
+        })
+      )
+      .subscribe();
   }
 
   private handleEvents(event: JitsiConferenceEvents) {

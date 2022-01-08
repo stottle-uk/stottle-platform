@@ -3,7 +3,6 @@ import {
   JitsiTrack
 } from '@stottle-platform/lib-jitsi-meet';
 import React from 'react';
-import { useJitsiDevices } from '../../hooks/useJitsiDevices';
 import { useMutedSate } from '../../hooks/useMutedState';
 import CallButton from './CallButton';
 
@@ -20,9 +19,9 @@ const ToolbarInner: React.FC<OwnProps> = ({
   audio,
   video,
   leaveConference,
-  showSettings
+  showSettings,
+  replaceDevice
 }) => {
-  const { replaceDevice } = useJitsiDevices();
   const isMuted = useMutedSate(audio, video);
 
   const toggleMute = async (t: JitsiTrack) =>

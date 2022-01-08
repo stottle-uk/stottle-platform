@@ -11,7 +11,7 @@ const Toolbar: React.FC = () => {
   const { muteParticipant } = useJitsiActions();
   const { replaceDevice } = useJitsiDevices();
   const { leaveConference } = useJitsiConference();
-  const { localTracks, allTracks } = useJitsiTracks('ME');
+  const { localTracks, allTracks, shareAudio } = useJitsiTracks('ME');
   const { lockRoom } = useJitsiPassword();
 
   const [settingsVisible, setSettingsVisible] = useState(false);
@@ -27,7 +27,7 @@ const Toolbar: React.FC = () => {
         muteAll={muteAll}
         showSettings={() => setSettingsVisible(!settingsVisible)}
         leaveConference={leaveConference}
-        replaceDevice={replaceDevice}
+        replaceDevice={shareAudio}
       />
       <Settings
         isVisible={settingsVisible}

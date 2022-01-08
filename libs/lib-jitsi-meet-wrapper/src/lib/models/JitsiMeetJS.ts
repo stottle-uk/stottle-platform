@@ -198,6 +198,12 @@ export interface JitsiEventsErrors {
   };
 }
 
+export interface JitsiAudioMixer {
+  addMediaStream(stream: MediaStream): void;
+  start(): MediaStream;
+  reset(): void;
+}
+
 export interface JitsiMeetJS {
   version: string;
   conference: JitsiConference;
@@ -231,7 +237,7 @@ export interface JitsiMeetJS {
     sampleRate: unknown,
     vadProcessor: unknown
   ) => unknown;
-  createAudioMixer: () => unknown;
+  createAudioMixer: () => JitsiAudioMixer;
   getActiveAudioDevice: () => Promise<{
     deviceId: string;
     deviceLabel: string;

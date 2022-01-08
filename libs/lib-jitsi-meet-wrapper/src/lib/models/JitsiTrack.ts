@@ -38,6 +38,8 @@ export interface JitsiTrack extends JitsiEventEmitter<JitsiTrack> {
   getDeviceId(): string;
   isEnded(): boolean;
   setEffect(effect?: JitsiTrackEffect): void;
+  isAudioTrack(): boolean;
+  getOriginalStream(): MediaStream;
 }
 
 export interface JitsiTrackEffect {

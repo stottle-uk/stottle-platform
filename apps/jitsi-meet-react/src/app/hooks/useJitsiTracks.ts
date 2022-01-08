@@ -55,6 +55,7 @@ export const useJitsiTracks = (username: string) => {
   return {
     localTracks: reduceTracks(tracksState.localTracks),
     allTracks,
-    participantsLength: Object.keys(allTracks).length
+    participantsLength: Object.keys(allTracks).length,
+    shareAudio: () => tracks.shareAudio()
   };
 };
