@@ -1,4 +1,4 @@
-import { EMPTY, from, merge, of, Subject } from 'rxjs';
+import { EMPTY, from, merge, Subject, throwError } from 'rxjs';
 import { catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
@@ -6,6 +6,7 @@ import {
   JitsiConferenceEventTypes
 } from '../models/events/conference';
 import { JitsiConnectionEventTypes } from '../models/events/connection';
+import { JitsiTrack } from '../models/JitsiTrack';
 import { AudioMixerEffect } from './effects/audioMixerEffect';
 import { JitsiMeetService } from './jitsiMeetService';
 import {
@@ -13,7 +14,11 @@ import {
   RemoveTrack,
   TracksStateActions
 } from './reducers/tracksActions';
-import { tracksInitialState, tracksReducer } from './reducers/tracksReducer';
+import {
+  tracksInitialState,
+  tracksReducer,
+  TracksState
+} from './reducers/tracksReducer';
 
 export class JitsiTracksStateService {
   private createLocalTracks$ = this.jitsiService.connectionEvents$.pipe(
@@ -51,24 +56,33 @@ export class JitsiTracksStateService {
           }
 
           if (track.getType() === 'audio') {
-            const localAudioTrack = tracksState.localTracks.find(
-              t => t.getType() === 'audio'
-            );
-            if (localAudioTrack) {
-              const effect = new AudioMixerEffect(track);
-
-              return localAudioTrack.setEffect(effect);
-            }
+            return this.mixAudio(track, tracksState);
           }
 
           return EMPTY;
         }),
-        catchError(err => {
-          console.error(err);
-          return of(err);
-        })
+        catchError(err =>
+          err.name === 'gum.screensharing_user_canceled'
+            ? EMPTY
+            : throwError(() => new Error(err.name))
+        )
       )
       .subscribe();
+  }
+
+  private mixAudio(track: JitsiTrack, tracksState: TracksState) {
+    const localAudioTrack = tracksState.localTracks.find(
+      t => t.getType() === 'audio'
+    );
+    if (localAudioTrack) {
+      const effect = new AudioMixerEffect(
+        track,
+        this.jitsiService.createAudioMixer()
+      );
+
+      return localAudioTrack.setEffect(effect);
+    }
+    return EMPTY;
   }
 
   private handleEvents(event: JitsiConferenceEvents) {
