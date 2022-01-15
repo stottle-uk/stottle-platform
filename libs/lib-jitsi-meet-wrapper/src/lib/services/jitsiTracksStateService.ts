@@ -1,5 +1,5 @@
-import { merge, Subject } from 'rxjs';
-import { filter, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { EMPTY, from, merge, of, Subject } from 'rxjs';
+import { catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { scanState, typeOf } from '../models/events/action';
 import {
   JitsiConferenceEvents,
@@ -44,16 +44,28 @@ export class JitsiTracksStateService {
         devices: ['desktop']
       })
       .pipe(
-        filter(track => track.getType() === 'audio'),
         withLatestFrom(this.state$),
-        tap(([track, tracksState]) => {
-          const localAudioTrack = tracksState.localTracks.find(
-            t => t.getType() === 'audio'
-          );
-
-          if (localAudioTrack) {
-            track.setEffect(new AudioMixerEffect(localAudioTrack));
+        switchMap(([track, tracksState]) => {
+          if (track.getType() === 'video') {
+            return from(track.dispose());
           }
+
+          if (track.getType() === 'audio') {
+            const localAudioTrack = tracksState.localTracks.find(
+              t => t.getType() === 'audio'
+            );
+            if (localAudioTrack) {
+              const effect = new AudioMixerEffect(track);
+
+              return localAudioTrack.setEffect(effect);
+            }
+          }
+
+          return EMPTY;
+        }),
+        catchError(err => {
+          console.error(err);
+          return of(err);
         })
       )
       .subscribe();

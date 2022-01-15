@@ -18,7 +18,6 @@ import {
 
 export class JitsiCallQualityStateService {
   private events$ = this.jitsiService.connectionQualityEvents$.pipe(
-    tap(console.log),
     typeOf(
       JitsiCallQualityEventTypes.RemoteStatsUpdated,
       JitsiCallQualityEventTypes.LocalStatsUpdated

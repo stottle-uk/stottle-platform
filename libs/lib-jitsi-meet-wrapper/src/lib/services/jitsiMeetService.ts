@@ -168,6 +168,10 @@ export class JitsiMeetService {
     );
   }
 
+  createAudioMixer() {
+    return this.jitsiMeet.createAudioMixer();
+  }
+
   createLocalTracks(options: CreateTracksOptions = defaultTracksOptions) {
     return from(this.jitsiMeet.createLocalTracks(options)).pipe(
       switchMap(tracks => tracks)
@@ -188,6 +192,13 @@ export class JitsiMeetService {
           )
         )
       )
+    );
+  }
+
+  replaceTrackv2(oldTrack: JitsiTrack, newTrack: JitsiTrack) {
+    return this.confInner$.pipe(
+      take(1),
+      tap(conf => conf.replaceTrack(oldTrack, newTrack))
     );
   }
 
@@ -282,57 +293,3 @@ export class JitsiMeetService {
     );
   }
 }
-
-// if (track.getType() === 'video') {
-//   return from(
-//     navigator.mediaDevices.getDisplayMedia({
-//       audio: true,
-//       video: true
-//     })
-//   ).pipe(
-//     switchMap(t => {
-//       console.log(t);
-//       console.log(t.getVideoTracks());
-//       track.setEffect({
-//         startEffect: stream => {
-//           //  'https://jsoncompare.org/LearningContainer/SampleFiles/Video/MP4/sample-mp4-file.mp4';
-//           const audioElement = document.createElement('audio');
-
-//           audioElement.srcObject = t;
-
-//           // videoElement.muted = true;
-//           audioElement.play();
-
-//           audioElement.addEventListener('loadeddata', () => {
-//             console.log('loaded!!!');
-//           });
-
-//           // mytestroomnamestuart1234
-//           stream.addTrack(audioElement.srcObject.getAudioTracks()[0]);
-
-//           console.log('startEffect', stream.getTracks());
-
-//           return stream;
-//         },
-//         stopEffect: () => {
-//           console.log('stopEffect');
-//         },
-//         isEnabled: track => {
-//           console.log('isEnabled', track);
-//           return true;
-//           // return track.getType() === 'video';
-//         }
-//       });
-
-//       return this.confInner$.pipe(
-//         take(1),
-//         switchMap(conf => conf.addTrack(track))
-//       );
-//     }),
-//     catchError(err => {
-//       console.log(err);
-
-//       return of({});
-//     })
-//   );
-// }
