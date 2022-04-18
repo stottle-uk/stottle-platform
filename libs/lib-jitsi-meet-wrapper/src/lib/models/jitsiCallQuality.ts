@@ -35,7 +35,9 @@ interface CallQualityResolution {
   [key: string]: Record<string, CallQualityResolutionItem>;
 }
 
-interface CallQualityFramerate {}
+interface CallQualityFramerate {
+  [key: string]: string;
+}
 
 interface CallQualityCodecItem {
   audio: string;
@@ -57,7 +59,9 @@ interface CallQualityTransport {
   rtt: number;
 }
 
-interface CallQualityAvgAudioLevels {}
+interface CallQualityAvgAudioLevels {
+  [key: string]: string;
+}
 
 export interface CallQualityLocal {
   connectionQuality: number;

@@ -1,5 +1,6 @@
 import { merge, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Lifecycle, scoped } from 'tsyringe';
 import { scanState, typeOf } from '../models/events/action';
 import {
   JitsiDevicesEvents,
@@ -14,6 +15,7 @@ import {
 } from './reducers/devicesActions';
 import { devicesInitialState, devicesReducer } from './reducers/devicesReducer';
 
+@scoped(Lifecycle.ContainerScoped)
 export class JitsiDevicesStateService {
   private devices$ = this.jitsiService.devices$.pipe(
     tap(devices => this.stateInner$.next(new AddDevices(devices)))

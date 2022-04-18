@@ -1,4 +1,5 @@
 import { map } from 'rxjs/operators';
+import { Lifecycle, scoped } from 'tsyringe';
 import { scanState } from '../models/events/action';
 import { JitsiMeetService } from './jitsiMeetService';
 import { SetChatMessages } from './reducers/chatActions';
@@ -8,6 +9,7 @@ import {
   JitsiChatMessage
 } from './reducers/chatReducer';
 
+@scoped(Lifecycle.ContainerScoped)
 export class JitsiChatStateService {
   private readonly CHAT_COMMAND_TYPE = 'command.chatMessages';
 

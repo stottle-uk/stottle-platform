@@ -1,5 +1,6 @@
 import { merge, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Lifecycle, scoped } from 'tsyringe';
 import { scanState, typeOf } from '../models/events/action';
 import {
   JitsiConferenceEvents,
@@ -13,6 +14,7 @@ import {
 } from './reducers/usersActions';
 import { usersInitialState, usersReducer } from './reducers/usersReducer';
 
+@scoped(Lifecycle.ContainerScoped)
 export class JitsiUsersStateService {
   private events$ = this.jitsiService.conferenceEvents$.pipe(
     typeOf(

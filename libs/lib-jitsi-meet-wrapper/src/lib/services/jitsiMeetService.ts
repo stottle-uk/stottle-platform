@@ -18,6 +18,7 @@ import {
   takeUntil,
   tap
 } from 'rxjs/operators';
+import { inject, Lifecycle, scoped } from 'tsyringe';
 import { Action } from '../models/events/action';
 import { JitsiCallQualityEvents } from '../models/events/callQuality';
 import {
@@ -33,7 +34,8 @@ import {
   JitsiConnection,
   JitsiConnectionOptions
 } from '../models/JitsiConnection';
-import { JitsiMeetJS } from '../models/JitsiMeetJS';
+import type { JitsiMeetJS } from '../models/JitsiMeetJS';
+import { JITSI_MEET_SERVICE } from '../models/JitsiMeetJS';
 import { CreateTracksOptions, JitsiTrack } from '../models/JitsiTrack';
 import {
   JitsiCommandValues,
@@ -54,12 +56,13 @@ const defaultTracksOptions = {
   }
 };
 
+@scoped(Lifecycle.ContainerScoped)
 export class JitsiMeetService {
   private destroy$ = new Subject();
   private connInner$ = new ReplaySubject<JitsiConnection>();
   private confInner$ = new ReplaySubject<JitsiConference>();
 
-  constructor(private jitsiMeet: JitsiMeetJS) {}
+  constructor(@inject(JITSI_MEET_SERVICE) private jitsiMeet: JitsiMeetJS) {}
 
   connectionEvents$ = this.connInner$.pipe(
     mergeMap(conn =>

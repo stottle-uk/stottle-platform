@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import * as jQuery from 'jquery';
+import { InjectionToken } from 'tsyringe';
 import { JitsiConference } from './JitsiConference';
 import { JitsiConnectionCtr } from './JitsiConnection';
 import { JitsiMediaDevices } from './JitsiMediaDevices';
@@ -15,6 +15,9 @@ declare global {
     getDisplayMedia(constraints?: MediaStreamConstraints): Promise<MediaStream>;
   }
 }
+
+export const JITSI_MEET_SERVICE: InjectionToken =
+  Symbol.for('JITSI_MEET_SERVICE');
 
 window.$ = jQuery;
 
@@ -246,7 +249,7 @@ export interface JitsiMeetJS {
   isDeviceChangeAvailable: (deviceType: string) => boolean;
   isMultipleAudioInputSupported: () => boolean;
   isCollectingLocalStats: () => boolean;
-  enumerateDevices: (callback: Function) => void;
+  enumerateDevices: (callback: () => void) => void;
   getGlobalOnErrorHandler: (
     message: unknown,
     source: unknown,

@@ -1,5 +1,6 @@
 import { merge, Subject } from 'rxjs';
 import { switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { Lifecycle, scoped } from 'tsyringe';
 import { scanState, typeOf } from '../models/events/action';
 import {
   JitsiConnectionEvents,
@@ -18,6 +19,7 @@ import {
   connectionReducer
 } from './reducers/connectionReducer';
 
+@scoped(Lifecycle.ContainerScoped)
 export class JitsiConnectionStateService {
   private confOptionsInner$ = new Subject<{
     roomname: string;

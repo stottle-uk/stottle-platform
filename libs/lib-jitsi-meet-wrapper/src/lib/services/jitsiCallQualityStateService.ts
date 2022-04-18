@@ -1,5 +1,6 @@
 import { merge, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Lifecycle, scoped } from 'tsyringe';
 import { scanState, typeOf } from '../models/events/action';
 import {
   JitsiCallQualityEvents,
@@ -16,6 +17,7 @@ import {
   callQualityReducer
 } from './reducers/callQualityReducer';
 
+@scoped(Lifecycle.ContainerScoped)
 export class JitsiCallQualityStateService {
   private events$ = this.jitsiService.connectionQualityEvents$.pipe(
     typeOf(

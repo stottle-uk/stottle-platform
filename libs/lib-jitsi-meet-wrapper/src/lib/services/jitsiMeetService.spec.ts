@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
+import 'core-js/proposals/reflect-metadata';
 import { merge, take, toArray } from 'rxjs';
 import { JitsiCallQualityEventTypes } from '../models/events/callQuality';
 import {

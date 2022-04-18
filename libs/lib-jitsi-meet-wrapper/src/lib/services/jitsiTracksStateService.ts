@@ -1,5 +1,6 @@
 import { EMPTY, from, merge, Subject, throwError } from 'rxjs';
 import { catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { Lifecycle, scoped } from 'tsyringe';
 import { scanState, typeOf } from '../models/events/action';
 import {
   JitsiConferenceEvents,
@@ -20,6 +21,7 @@ import {
   TracksState
 } from './reducers/tracksReducer';
 
+@scoped(Lifecycle.ContainerScoped)
 export class JitsiTracksStateService {
   private createLocalTracks$ = this.jitsiService.connectionEvents$.pipe(
     typeOf(JitsiConnectionEventTypes.ConnectionEstablished),

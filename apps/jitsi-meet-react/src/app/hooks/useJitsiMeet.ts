@@ -10,8 +10,9 @@ import {
   JitsiTracksStateService,
   JitsiUsersStateService
 } from '@stottle-platform/lib-jitsi-meet';
-import { createContext, useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { merge } from 'rxjs';
+import { container, InjectionToken } from 'tsyringe';
 
 const config = {
   disableSimulcast: true,
@@ -94,53 +95,29 @@ const config = {
   }
 };
 
+const useResolve = <T>(token: InjectionToken<T>) => container.resolve(token);
+
 const { JitsiMeetJS } = window;
 JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
 JitsiMeetJS.init(config);
 
-const jitsiMeetService = new JitsiMeetService(JitsiMeetJS);
-const connectionStateService = new JitsiConnectionStateService(
-  jitsiMeetService
-);
-const conferenceStateService = new JitsiConferenceStateService(
-  jitsiMeetService
-);
-const usersStateService = new JitsiUsersStateService(jitsiMeetService);
-const devicesStateService = new JitsiDevicesStateService(jitsiMeetService);
-const tracksStateService = new JitsiTracksStateService(jitsiMeetService);
-const chatStateService = new JitsiChatStateService(jitsiMeetService);
-const jitsiStatsStateService = new JitsiStatsStateService(jitsiMeetService);
-const jitsiPasswordStateService = new JitsiPasswordStateService(
-  jitsiMeetService
-);
-const jitsiCallQualityStateService = new JitsiCallQualityStateService(
-  jitsiMeetService
-);
-
-const JitsiContext = createContext(jitsiMeetService);
-const ConnectionStateContext = createContext(connectionStateService);
-const ConferenceStateContext = createContext(conferenceStateService);
-const UsersStateContext = createContext(usersStateService);
-const DevicesStateContext = createContext(devicesStateService);
-const TracksStateContext = createContext(tracksStateService);
-const ChatStateService = createContext(chatStateService);
-const StatsStateContext = createContext(jitsiStatsStateService);
-const PasswordStateContext = createContext(jitsiPasswordStateService);
-const CallQualityContext = createContext(jitsiCallQualityStateService);
-
-export const useJitsiMeet = () => useContext(JitsiContext);
-export const useJitsiConferenceState = () => useContext(ConferenceStateContext);
-export const useJitsiUsersState = () => useContext(UsersStateContext);
-export const useJitsiDevicesState = () => useContext(DevicesStateContext);
-export const useJitsiTracksState = () => useContext(TracksStateContext);
-export const useJitsiChatState = () => useContext(ChatStateService);
-export const useJitsiStatsState = () => useContext(StatsStateContext);
-export const useJitsiPasswordState = () => useContext(PasswordStateContext);
-export const useJitsiCallQualityState = () => useContext(CallQualityContext);
+export const useJitsiMeet = () => useResolve(JitsiMeetService);
+export const useJitsiConnection = () => useResolve(JitsiConnectionStateService);
+export const useJitsiConferenceState = () =>
+  useResolve(JitsiConferenceStateService);
+export const useJitsiUsersState = () => useResolve(JitsiUsersStateService);
+export const useJitsiDevicesState = () => useResolve(JitsiDevicesStateService);
+export const useJitsiTracksState = () => useResolve(JitsiTracksStateService);
+export const useJitsiChatState = () => useResolve(JitsiChatStateService);
+export const useJitsiStatsState = () => useResolve(JitsiStatsStateService);
+export const useJitsiPasswordState = () =>
+  useResolve(JitsiPasswordStateService);
+export const useJitsiCallQualityState = () =>
+  useResolve(JitsiCallQualityStateService);
 
 export const useJitsiConnectionState = () => {
   const jitsi = useJitsiMeet();
-  const conn = useContext(ConnectionStateContext);
+  const conn = useJitsiConnection();
   const conf = useJitsiConferenceState();
   const users = useJitsiUsersState();
   const devices = useJitsiDevicesState();
